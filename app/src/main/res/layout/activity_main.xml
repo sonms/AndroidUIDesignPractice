@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.ramotion.navigationtoolbar.NavigationToolBarLayout
+        android:id="@+id/navigation_toolbar_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fitsSystemWindows="true"
+        app:headerBackgroundLayout="@layout/header_background"
+        app:headerTopBorderAtSystemBar="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <include layout="@layout/content_layout" />
+
+    </com.ramotion.navigationtoolbar.NavigationToolBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewtest"
         android:layout_width="0dp"
@@ -21,14 +38,14 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        app:fabCustomSize="70dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="67dp"
+        android:contentDescription="TODO"
         android:src="@android:drawable/ic_input_add"
+        app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerviewtest"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerviewtest" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

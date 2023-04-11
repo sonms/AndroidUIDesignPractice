@@ -42,6 +42,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    //toolbar
+    implementation 'com.ramotion.navigationtoolbar:navigation-toolbar:0.1.3'
 
     //animation
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
