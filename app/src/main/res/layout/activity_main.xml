@@ -4,48 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-    <com.ramotion.navigationtoolbar.NavigationToolBarLayout
-        android:id="@+id/navigation_toolbar_layout"
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fitsSystemWindows="true"
-        app:headerBackgroundLayout="@layout/header_background"
-        app:headerTopBorderAtSystemBar="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerviewtest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_width="552dp"
+            android:layout_height="156dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:scaleType="fitXY" />
 
-        <include layout="@layout/content_layout" />
+        <LinearLayout
+            android:id="@+id/layoutIndicators"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp" />
+    </FrameLayout>
 
-    </com.ramotion.navigationtoolbar.NavigationToolBarLayout>
+    <!--floating의 src 가운데 정렬 하는 법은 버튼 크기와 같게 fabCustomSize해주면 됨-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewtest"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="205dp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!--floating의 src 가운데 정렬 하는 법은 버튼 크기와 같게 fabCustomSize해주면 됨-->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="67dp"
-        android:contentDescription="TODO"
-        android:src="@android:drawable/ic_input_add"
-        app:fabCustomSize="70dp"
+        android:layout_marginBottom="475dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerviewtest" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="160dp"
+        android:contentDescription="TODO"
+        android:src="@android:drawable/ic_input_add"
+        app:fabCustomSize="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.576" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
