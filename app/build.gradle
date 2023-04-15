@@ -43,7 +43,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     //viewpager2, viewpager에 보이는 점
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'me.relex:circleindicator:2.1.4'
+
 
     //toolbar
     implementation 'com.ramotion.navigationtoolbar:navigation-toolbar:0.1.3'

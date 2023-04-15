@@ -1,46 +1,44 @@
 package com.example.myappuidesignpractice
 
-import android.R
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myappuidesignpractice.databinding.ItemLayoutBinding
 import com.example.myappuidesignpractice.databinding.ItemSliderBinding
 
 
-class ImageSliderAdapter(context: Context, sliderImage: Array<String>) :
+class ImageSliderAdapter() :
     RecyclerView.Adapter<ImageSliderAdapter.MyViewHolder>() {
-    private val context: Context
+    private var context: Context? = null
     private lateinit var binding : ItemSliderBinding
-    private val sliderImage: Array<String>
+    var sliderText = arrayListOf<String>()
+    private var position = 0
 
-    init {
-        this.context = context
-        this.sliderImage = sliderImage
+    inner class MyViewHolder(private val binding : ItemSliderBinding) : RecyclerView.ViewHolder(binding.root) {
+        private var mView: TextView? = null
+        var itemPosition = 0
+        fun bindSliderText(s: String) {
+            itemPosition = this.adapterPosition
+            mView = binding.textSlider
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         binding = ItemSliderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return MyViewHolder(binding.root)
+        context = parent.context
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindSliderImage(sliderImage[position])
+        holder.bindSliderText(sliderText[position])
     }
 
     override fun getItemCount(): Int {
-        return sliderImage.size
+        return sliderText.size
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val mImageView: ImageView = binding.imageSlider
 
-        fun bindSliderImage(imageURL: String?) {
-
-        }
-    }
 }
