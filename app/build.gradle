@@ -44,6 +44,8 @@ dependencies {
     //viewpager2, viewpager에 보이는 점
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
+    //indicator
+    implementation("com.tbuonomo:dotsindicator:4.3")
 
     //toolbar
     implementation 'com.ramotion.navigationtoolbar:navigation-toolbar:0.1.3'

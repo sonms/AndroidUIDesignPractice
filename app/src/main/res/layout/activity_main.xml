@@ -34,14 +34,27 @@
             android:scaleType="fitXY" />
         </FrameLayout>
 
-
+        <!--
         <LinearLayout
             android:id="@+id/layoutIndicators"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp" >-->
+
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/spring_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:selectedDotColor = "@color/black"
+                app:dotsColor="@color/colorAccent"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="16dp"
+                app:dotsSpacing="4dp"
+                app:dotsStrokeWidth="2dp"
+                />
     </FrameLayout>
 
     <!--floating의 src 가운데 정렬 하는 법은 버튼 크기와 같게 fabCustomSize해주면 됨-->

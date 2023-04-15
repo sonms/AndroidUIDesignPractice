@@ -1,14 +1,24 @@
 package com.example.myappuidesignpractice
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
+import android.R
+import android.graphics.drawable.Drawable
+import android.media.Image
 import android.os.Bundle
+import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myappuidesignpractice.databinding.ActivityMainBinding
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding : ActivityMainBinding
@@ -19,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     //뷰페이저
     private lateinit var viewPagerAdapter : ImageSliderAdapter
     private var pageData = arrayListOf<String>()
+    //페이지 마다 점표시
+    private lateinit var layoutIndicator : LinearLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,8 +38,9 @@ class MainActivity : AppCompatActivity() {
 
         initRV()
         initVP()
+        //initIndicators(pageData.size)
 
-        val rv = findViewById<RecyclerView>(R.id.recyclerviewtest)
+        val rv = mBinding.recyclerviewtest
         rv.itemAnimator = SlideInUpAnimator(OvershootInterpolator(1f))
         /*
         * recyclerView.itemAnimator = SlideInLeftAnimator().apply {
@@ -45,13 +58,9 @@ class MainActivity : AppCompatActivity() {
             adapter.notifyItemInserted(position)
             position += 1
         }
-        //슬라이드할 경우 실행할 이벤트
-        mBinding.viewpager.registerOnPageChangeCallback(object  : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
 
-            }
-        })
+        val indicator : WormDotsIndicator = mBinding.springDot
+        indicator.setViewPager2(mBinding.viewpager)
     }
 
     private fun initRV() {
@@ -63,11 +72,14 @@ class MainActivity : AppCompatActivity() {
         mBinding.recyclerviewtest.layoutManager = manager
     }
     private fun initVP() {
+        //layoutIndicator = mBinding.layoutIndicators
         pageData = initDataSet()
         viewPagerAdapter = ImageSliderAdapter()
         viewPagerAdapter!!.sliderText = pageData
         mBinding.viewpager.adapter = viewPagerAdapter
         //adapter!!.setHasStableIds(true)
+        //슬라이드할 경우 실행할 이벤트
+
     }
     private fun initDataSet() : ArrayList<String> {
         var itemList = arrayListOf<String>()
@@ -77,4 +89,40 @@ class MainActivity : AppCompatActivity() {
 
         return itemList
     }
+    /*private fun initIndicators(cnt : Int) {
+        val indicators = ArrayList<ImageView>(cnt)
+        println(indicators)
+        val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        params.setMargins(16, 8, 16, 8)
+
+        for (i in 0 until indicators.size) {
+            indicators[i] = ImageView(this)
+            indicators[i].setImageDrawable(ContextCompat.getDrawable(this,
+                com.example.myappuidesignpractice.R.drawable.bg_indicator_inactive))
+            indicators[i].layoutParams = params
+            layoutIndicator.addView(indicators[i])
+        }
+
+        setCurrentIndicator(0)
+    }
+
+    private fun setCurrentIndicator(position : Int) {
+        val childCnt = layoutIndicator.childCount
+        print(position)
+        for (i in 0 until childCnt) {
+            val iv : ImageView = layoutIndicator.getChildAt(i) as ImageView
+            if (i == position) {
+                iv.setImageDrawable(ContextCompat.getDrawable(
+                    this,
+                    com.example.myappuidesignpractice.R.drawable.bg_indicator_active
+                ))
+            } else {
+                iv.setImageDrawable(ContextCompat.getDrawable(
+                    this,
+                    com.example.myappuidesignpractice.R.drawable.bg_indicator_inactive
+                ))
+            }
+        }
+
+    }*/
 }

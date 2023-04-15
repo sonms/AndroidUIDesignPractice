@@ -18,11 +18,12 @@ class ImageSliderAdapter() :
     private var position = 0
 
     inner class MyViewHolder(private val binding : ItemSliderBinding) : RecyclerView.ViewHolder(binding.root) {
-        private var mView: TextView? = null
+        private var mView: TextView = binding.textSlider
         var itemPosition = 0
         fun bindSliderText(s: String) {
             itemPosition = this.adapterPosition
-            mView = binding.textSlider
+            mView.text = sliderText[itemPosition]
+
         }
     }
 
