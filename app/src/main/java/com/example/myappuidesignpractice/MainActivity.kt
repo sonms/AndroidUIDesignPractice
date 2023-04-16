@@ -1,21 +1,14 @@
 package com.example.myappuidesignpractice
 
-import android.R
-import android.graphics.drawable.Drawable
-import android.media.Image
 import android.os.Bundle
-import android.view.ViewGroup
+import android.util.Log
+import android.view.View
 import android.view.animation.OvershootInterpolator
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.myappuidesignpractice.databinding.ActivityMainBinding
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
@@ -31,6 +24,13 @@ class MainActivity : AppCompatActivity() {
     private var pageData = arrayListOf<String>()
     //페이지 마다 점표시
     private lateinit var layoutIndicator : LinearLayout
+
+    val callback: OnPageChangeCallback = object : OnPageChangeCallback() {
+        override fun onPageSelected(pos: Int) {
+            super.onPageSelected(pos)
+            println(pos)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         initRV()
         initVP()
         //initIndicators(pageData.size)
+
 
         val rv = mBinding.recyclerviewtest
         rv.itemAnimator = SlideInUpAnimator(OvershootInterpolator(1f))
@@ -60,7 +61,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val indicator : WormDotsIndicator = mBinding.springDot
-        indicator.setViewPager2(mBinding.viewpager)
+        //indicator.setViewPager2(mBinding.viewpager)
+        indicator.attachTo(mBinding.viewpager)
+
     }
 
     private fun initRV() {
@@ -71,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         mBinding.recyclerviewtest.setHasFixedSize(true)
         mBinding.recyclerviewtest.layoutManager = manager
     }
+
     private fun initVP() {
         //layoutIndicator = mBinding.layoutIndicators
         pageData = initDataSet()
@@ -79,8 +83,10 @@ class MainActivity : AppCompatActivity() {
         mBinding.viewpager.adapter = viewPagerAdapter
         //adapter!!.setHasStableIds(true)
         //슬라이드할 경우 실행할 이벤트
-
+        mBinding.viewpager.registerOnPageChangeCallback(callback)
     }
+
+
     private fun initDataSet() : ArrayList<String> {
         var itemList = arrayListOf<String>()
         itemList.add("Scientist")
