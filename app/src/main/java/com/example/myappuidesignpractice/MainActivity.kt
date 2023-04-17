@@ -1,16 +1,32 @@
 package com.example.myappuidesignpractice
 
+import android.animation.LayoutTransition
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.telecom.Call
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AnticipateOvershootInterpolator
 import android.view.animation.OvershootInterpolator
+import android.widget.FrameLayout
+import android.widget.FrameLayout.LayoutParams
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.myappuidesignpractice.databinding.ActivityMainBinding
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +40,9 @@ class MainActivity : AppCompatActivity() {
     private var pageData = arrayListOf<String>()
     //페이지 마다 점표시
     private lateinit var layoutIndicator : LinearLayout
+    private lateinit var pr : LinearLayout.LayoutParams
+    private lateinit var layout : LinearLayout
+    private var isDetailLayout = false
 
     val callback: OnPageChangeCallback = object : OnPageChangeCallback() {
         override fun onPageSelected(pos: Int) {
@@ -35,6 +54,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+        //layout = mBinding.frameLayout
+
+        //pr = layout.layoutParams as android.widget.LinearLayout.LayoutParams
 
         initRV()
         initVP()
@@ -64,6 +86,36 @@ class MainActivity : AppCompatActivity() {
         //indicator.setViewPager2(mBinding.viewpager)
         indicator.attachTo(mBinding.viewpager)
 
+        //뷰페이저 터치이벤트
+        mBinding.viewpager.getChildAt(0).setOnTouchListener { view, motionEvent ->
+            /*CoroutineScope(Dispatchers.Main).launch {
+                //val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                //mBinding.frameLayout.layoutParams = params
+
+            }*/
+            //mBinding.frameLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+            false
+        }
+
+        mBinding.con.setOnClickListener {
+            if (isDetailLayout) {
+                swapFrames(R.layout.activity_main)
+            } else {
+                swapFrames(R.layout.activity_main_detail)
+            }
+        }
+    }
+
+    private fun swapFrames(layoutId : Int) {
+        val con = ConstraintSet()
+        con.clone(this, layoutId)
+        val transition = ChangeBounds()
+        transition.interpolator = AnticipateOvershootInterpolator(1.0f)
+        transition.duration = 1200
+
+        TransitionManager.beginDelayedTransition(mBinding.con, transition)
+        con.applyTo(mBinding.con)
+        isDetailLayout = !isDetailLayout
     }
 
     private fun initRV() {
@@ -130,5 +182,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }*/
+
+    /*override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if (event!!.action == MotionEvent.ACTION_DOWN) {
+            change(3f)
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed(java.lang.Runnable {
+                kotlin.run {
+                    change(3f)
+                }
+            }, 1000)
+
+        }
+        return super.onTouchEvent(event)
+    }
+
+    private fun change(v : Float) {
+        pr.height = (v*mBinding.frameLayout.height).toInt()
+        mBinding.frameLayout.layoutParams = pr
     }*/
 }
