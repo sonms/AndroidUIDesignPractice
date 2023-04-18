@@ -40,6 +40,4 @@ class ImageSliderAdapter() :
     override fun getItemCount(): Int {
         return sliderText.size
     }
-
-
 }

@@ -7,8 +7,8 @@
     <!--여기도 match를 해야 페이지 오류가 나지않음-->
     <TextView
         android:id="@+id/textSlider"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
         android:gravity="center"
         android:text="TextView"

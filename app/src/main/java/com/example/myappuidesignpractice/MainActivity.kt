@@ -18,6 +18,7 @@ import android.widget.FrameLayout.LayoutParams
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.myappuidesignpractice.databinding.ActivityMainBinding
@@ -52,6 +53,9 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val splashScreen = installSplashScreen()
+
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         //layout = mBinding.frameLayout

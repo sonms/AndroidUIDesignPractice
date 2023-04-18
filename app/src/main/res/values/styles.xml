@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <!-- Light/Day Mode theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -65,6 +65,17 @@
         <item name="android:layout_height">3dp</item>
         <item name="android:background">@android:color/white</item>
         <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="Theme.App.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
+        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="s">@mipmap/ic_launcher_round</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyAppUIDesignPractice</item>
+        <item name="android:windowLightStatusBar" >true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
     </style>
 
 </resources>
