@@ -1,23 +1,24 @@
 package com.example.myappuidesignpractice
 
-import android.animation.LayoutTransition
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.telecom.Call
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.animation.AnticipateInterpolator
 import android.view.animation.AnticipateOvershootInterpolator
 import android.view.animation.OvershootInterpolator
-import android.widget.FrameLayout
-import android.widget.FrameLayout.LayoutParams
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.animation.doOnEnd
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -44,7 +45,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pr : LinearLayout.LayoutParams
     private lateinit var layout : LinearLayout
     private var isDetailLayout = false
-
+    //splash screen animation
+    var isReady = false
+    var isStart = false
+    //퍼미션
+    private val GPS_ENABLE_REQUEST_CODE = 2001
+    private val PERMISSIONS_REQUEST_CODE = 100
+    private val REQUEST_PERMISSIONS = 1
+    var permission = mutableMapOf<String, String>()
     val callback: OnPageChangeCallback = object : OnPageChangeCallback() {
         override fun onPageSelected(pos: Int) {
             super.onPageSelected(pos)
@@ -52,9 +60,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        //안드로이드 버전이 S이상일때만 적용
+        initSplashScreen()
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            splashScreen.setOnExitAnimationListener {splashScreenView ->
+                val animScaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 8f)
+                val animScaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 8f)
+                val animAlpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1f, 0f)
 
-        val splashScreen = installSplashScreen()
+                ObjectAnimator.ofPropertyValuesHolder(
+                    splashScreenView.iconView,
+                    animAlpha,
+                    animScaleX,
+                    animScaleY
+                ).run {
+                    interpolator = AnticipateInterpolator()
+                    duration = 300L
+                    doOnEnd { splashScreenView.remove() }
+                    start()
+                }
+            }
+        }*/
+            super.onCreate(savedInstanceState)
+
+
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
@@ -65,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         initRV()
         initVP()
         //initIndicators(pageData.size)
-
+        checkPermission()
 
         val rv = mBinding.recyclerviewtest
         rv.itemAnimator = SlideInUpAnimator(OvershootInterpolator(1f))
@@ -106,6 +135,92 @@ class MainActivity : AppCompatActivity() {
                 swapFrames(R.layout.activity_main)
             } else {
                 swapFrames(R.layout.activity_main_detail)
+            }
+        }
+
+        mBinding.testbtn.setOnClickListener {
+            val intent = Intent(this, LocationTestActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSIONS_REQUEST_CODE && grantResults.size == permission.size) {
+            grantResults.forEach {
+                if(it == PackageManager.PERMISSION_DENIED) {
+                    Toast.makeText(applicationContext, "서비스의 필요한 권한입니다.\n권한에 동의해주세요.", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+        }
+    }
+
+    private fun checkPermission() {
+        permission["fine"] = android.Manifest.permission.ACCESS_FINE_LOCATION
+        permission["coarse"] = android.Manifest.permission.ACCESS_COARSE_LOCATION
+
+        //현재 권한 검사
+        var denied = permission.count { ContextCompat.checkSelfPermission(this, it.value) == PackageManager.PERMISSION_DENIED }
+
+        //마시멜로 버전 이후
+        if(denied > 0) {
+            requestPermissions(permission.values.toTypedArray(), PERMISSIONS_REQUEST_CODE)
+        }
+    }
+
+    private fun initData() {
+        // 별도의 데이터 처리가 없기 때문에 3초의 딜레이를 줌.
+        // 선행되어야 하는 작업이 있는 경우, 이곳에서 처리 후 isReady를 변경.
+        CoroutineScope(Dispatchers.IO).launch {
+            delay(3000)
+        }
+        isReady = true
+    }
+
+    private fun initSplashScreen() {
+        initData()
+        val splashScreen = installSplashScreen()
+        val content: View = findViewById(android.R.id.content)
+        // SplashScreen이 생성되고 그려질 때 계속해서 호출된다.
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    // Check if the initial data is ready.
+                    return if (isReady) {
+                        // 3초 후 Splash Screen 제거
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        true
+                    } else {
+                        // The content is not ready
+                        false
+                    }
+                }
+            }
+        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            splashScreen.setOnExitAnimationListener {splashScreenView ->
+                val animScaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 8f)
+                val animScaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 8f)
+                val animAlpha = PropertyValuesHolder.ofFloat(View.ALPHA, 1f, 0f)
+
+                ObjectAnimator.ofPropertyValuesHolder(
+                    splashScreenView.iconView,
+                    animAlpha,
+                    animScaleX,
+                    animScaleY
+                ).run {
+                    interpolator = AnticipateInterpolator()
+                    duration = 300L
+                    doOnEnd { splashScreenView.remove() }
+                    start()
+                }
             }
         }
     }
