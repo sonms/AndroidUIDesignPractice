@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     var isReady = false
     var isStart = false
     //퍼미션
+    private var isCheckPermissions = false
     private val GPS_ENABLE_REQUEST_CODE = 2001
     private val PERMISSIONS_REQUEST_CODE = 100
     private val REQUEST_PERMISSIONS = 1
@@ -139,7 +140,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         mBinding.testbtn.setOnClickListener {
-            val intent = Intent(this, LocationTestActivity::class.java)
+            val intent = Intent(this, LocationTestActivity::class.java).apply {
+                putExtra("grant", isCheckPermissions)
+            }
             startActivity(intent)
             finish()
         }
@@ -156,6 +159,8 @@ class MainActivity : AppCompatActivity() {
                 if(it == PackageManager.PERMISSION_DENIED) {
                     Toast.makeText(applicationContext, "서비스의 필요한 권한입니다.\n권한에 동의해주세요.", Toast.LENGTH_SHORT).show()
                     finish()
+                } else {
+                    isCheckPermissions = true
                 }
             }
         }
