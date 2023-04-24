@@ -1,6 +1,5 @@
 package com.example.myappuidesignpractice
 
-import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -9,16 +8,20 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ServiceCompat.stopForeground
 import com.example.myappuidesignpractice.databinding.ActivityLocationTestBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mBinding : ActivityLocationTestBinding
@@ -36,6 +39,7 @@ class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {
     //private lateinit var mapFragment : SupportMapFragment
     //위치 값 요청에 대한 갱신 정보를 받는 변수
     lateinit var locationCallback: LocationCallback
+    private var isBtnClick = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_location_test)
@@ -57,6 +61,22 @@ class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {
             if (permissionCheckData || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 //currentLocationUpdates() //둘
                 initGoogleMap() //첫
+                isBtnClick = !isBtnClick
+
+                if (isBtnClick) {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val color = getColor(R.color.black)
+                        mBinding.button.setBackgroundColor(color)
+                        mBinding.button.text = "실시간 위치 확인"
+                    }
+                } else {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val color = getColor(R.color.teal_200)
+                        mBinding.button.setBackgroundColor(color)
+                        mBinding.button.text = "위치 확인 종료"
+                    }
+                }
+
             } else {
                 Toast.makeText(this, "위치 권한이 없습니다. 설정에 가서 권한 체크를 해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -109,27 +129,33 @@ class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {
             interval = 1000
         }
 
-        locationCallback = object :LocationCallback(){
-            //1초에 한번씩 변경된 위치 정보가 onLocationResult 으로 전달된다.
-            override fun onLocationResult(locationResult: LocationResult) {
-                locationResult?.let{
-                    Log.d("위치정보",  "위도: ${it.locations[0].latitude} 경도: ${it.locations[0].longitude}")
-                    //   setLastLocation(location) //계속 실시간으로 위치를 받아오고 있기 때문에 맵을 확대해도 다시 줄어든다.
-                    setLocation(it.locations[0].latitude, it.locations[0].longitude)
-
-                   /* for (location in it.locations){
-                        Log.d("위치정보",  "위도: ${location.latitude} 경도: ${location.longitude}")
+        if (isBtnClick) {
+            locationCallback = object :LocationCallback(){
+                //1초에 한번씩 변경된 위치 정보가 onLocationResult 으로 전달된다.
+                override fun onLocationResult(locationResult: LocationResult) {
+                    locationResult?.let{
+                        Log.d("위치정보",  "위도: ${it.locations[0].latitude} 경도: ${it.locations[0].longitude}")
                         //   setLastLocation(location) //계속 실시간으로 위치를 받아오고 있기 때문에 맵을 확대해도 다시 줄어든다.
-                        setLocation(location.latitude, location.longitude)
-                    }*/
+                        setLocation(it.locations[0].latitude, it.locations[0].longitude)
+
+                        /* for (location in it.locations){
+                             Log.d("위치정보",  "위도: ${location.latitude} 경도: ${location.longitude}")
+                             //   setLastLocation(location) //계속 실시간으로 위치를 받아오고 있기 때문에 맵을 확대해도 다시 줄어든다.
+                             setLocation(location.latitude, location.longitude)
+                         }*/
+                    }
                 }
             }
+
+            //권한 처리
+            mCurrentLocation!!.requestLocationUpdates(locationRequest,locationCallback,Looper.myLooper())
+        } else {
+            LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(locationCallback)
+            mMap.clear()
         }
 
-        //권한 처리
-        mCurrentLocation!!.requestLocationUpdates(locationRequest,locationCallback,Looper.myLooper())
-
     }
+
     //첫
     fun setLocation(latitude:Double,longitude:Double) {
         val currentLocation = LatLng(latitude, longitude)
@@ -147,6 +173,13 @@ class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googlemap
         mCurrentLocation = LocationServices.getFusedLocationProviderClient(this)
         updateLocation()
+        /*if (isBtnClick) {
+
+        } else {
+            //LocationServices.getFusedLocationProviderClient(this).removeLocationUpdates(mLocationCallback)
+            stopLocation()
+        }*/
+
         //updateLocation()
         /*val markerOptions = MarkerOptions()
 
@@ -156,6 +189,4 @@ class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(markerOptions)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 20F))
     */}
-
-
 }
