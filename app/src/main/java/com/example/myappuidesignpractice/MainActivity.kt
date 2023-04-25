@@ -20,9 +20,14 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.myappuidesignpractice.databinding.ActivityMainBinding
+import com.example.myappuidesignpractice.fragment.FirstFragment
+import com.example.myappuidesignpractice.fragment.SecondFragment
+import com.example.myappuidesignpractice.fragment.ThirdFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.coroutines.CoroutineScope
@@ -54,12 +59,31 @@ class MainActivity : AppCompatActivity() {
     private val PERMISSIONS_REQUEST_CODE = 100
     private val REQUEST_PERMISSIONS = 1
     var permission = mutableMapOf<String, String>()
+    //뷰페이저 페이지체인지 콜백
     val callback: OnPageChangeCallback = object : OnPageChangeCallback() {
         override fun onPageSelected(pos: Int) {
             super.onPageSelected(pos)
-            println(pos)
+            //println(pos)
+            when(pos) {
+                0 -> {
+                    setFragment(TAG_A, FirstFragment())
+                }
+
+                1 -> {
+                    setFragment(TAG_B, SecondFragment())
+                }
+
+                2 -> {
+                    setFragment(TAG_C, ThirdFragment())
+                }
+            }
         }
     }
+    //프래그먼트
+    private val TAG_A = "a_fragment"
+    private val TAG_B = "b_fragment"
+    private val TAG_C = "c_fragment"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //안드로이드 버전이 S이상일때만 적용
         initSplashScreen()
@@ -271,6 +295,46 @@ class MainActivity : AppCompatActivity() {
 
         return itemList
     }
+
+    fun setFragment(tag : String, fragment: Fragment) {
+        val manager : FragmentManager = supportFragmentManager
+        val bt = manager.beginTransaction()
+
+        if (manager.findFragmentByTag(tag) == null) {
+            bt.add(R.id.fragmenttest, fragment, tag)
+        }
+
+        val f = manager.findFragmentByTag(TAG_A)
+        val s = manager.findFragmentByTag(TAG_B)
+        val t = manager.findFragmentByTag(TAG_C)
+
+        if (f != null) {
+            bt.hide(f)
+        }
+        if (s != null) {
+            bt.hide(s)
+        }
+        if (t != null) {
+            bt.hide(t)
+        }
+
+        if (tag == TAG_A) {
+            if (f != null) {
+                bt.show(f)
+            }
+        }
+        else if (tag == TAG_B) {
+            if (s != null) {
+                bt.show(s)
+            }
+        }
+        else if (tag == TAG_C) {
+            if (t != null) {
+                bt.show(t)
+            }
+        }
+        bt.commitAllowingStateLoss()
+    }
     /*private fun initIndicators(cnt : Int) {
         val indicators = ArrayList<ImageView>(cnt)
         println(indicators)
@@ -326,4 +390,5 @@ class MainActivity : AppCompatActivity() {
         pr.height = (v*mBinding.frameLayout.height).toInt()
         mBinding.frameLayout.layoutParams = pr
     }*/
+
 }
