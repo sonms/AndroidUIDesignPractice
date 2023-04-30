@@ -8,16 +8,21 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAppUIDesignPractice"
-        android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCdfxe-5i0h4ncISpoypvx0poAc_To1ZIY"/>
+            android:value="AIzaSyCdfxe-5i0h4ncISpoypvx0poAc_To1ZIY" />
+
         <activity
             android:name=".LocationTestActivity"
             android:exported="false" />
