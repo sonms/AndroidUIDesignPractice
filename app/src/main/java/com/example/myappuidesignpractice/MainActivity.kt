@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //안드로이드 버전이 S이상일때만 적용
-        initSplashScreen()
+        //initSplashScreen()
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             splashScreen.setOnExitAnimationListener {splashScreenView ->
                 val animScaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 8f)
