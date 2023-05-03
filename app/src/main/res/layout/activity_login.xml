@@ -9,15 +9,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="416dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="391dp"
+        android:layout_width="411dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="519dp"
         android:gravity="center"
         android:text="LOGIN"
         android:textColor="@color/teal_700"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/sign_in_btn"
+        app:layout_constraintBottom_toTopOf="@+id/search_id"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,6 +59,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white"
             android:hint="Email" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,21 +75,59 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/white"
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/sign_in_btn"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="147dp"
         android:layout_marginStart="45dp"
         android:layout_marginEnd="45dp"
+        android:layout_marginBottom="185dp"
         android:background="@drawable/sign_in_btn_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_member" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.946" />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_google_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_member"
+        app:layout_constraintVertical_bias="0.789" />
+
+    <TextView
+        android:id="@+id/search_id"
+        android:layout_width="206dp"
+        android:layout_height="98dp"
+        android:gravity="center"
+        android:text="아이디 찾기"
+        android:textColor="@color/teal_200"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_google_btn" />
+
+    <TextView
+        android:id="@+id/search_password"
+        android:layout_width="207dp"
+        android:layout_height="97dp"
+        android:gravity="center"
+        android:text="비밀번호 찾기"
+        android:textColor="@color/teal_200"
+        app:layout_constraintBaseline_toBaselineOf="@+id/search_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/search_id" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
