@@ -9,9 +9,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.myappuidesignpractice.databinding.ActivityLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -20,6 +22,9 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
     private lateinit var mBinding : ActivityLoginBinding
     var isReady = false
+    //로그인
+    lateinit var mGoogleSignInClient : GoogleSignInClient
+    lateinit var resultLauncher : ActivityResultLauncher<Intent>
     override fun onCreate(savedInstanceState: Bundle?) {
         initSplashScreen()
         super.onCreate(savedInstanceState)
