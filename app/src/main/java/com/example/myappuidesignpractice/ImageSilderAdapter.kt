@@ -24,6 +24,7 @@ class ImageSliderAdapter() :
             itemPosition = this.adapterPosition
             mView.text = sliderText[itemPosition]
 
+
         }
     }
 

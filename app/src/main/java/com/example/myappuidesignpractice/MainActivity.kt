@@ -29,6 +29,9 @@ import com.example.myappuidesignpractice.fragment.FirstFragment
 import com.example.myappuidesignpractice.fragment.SecondFragment
 import com.example.myappuidesignpractice.fragment.ThirdFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //안드로이드 버전이 S이상일때만 적용
-        initSplashScreen()
+        //initSplashScreen()
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             splashScreen.setOnExitAnimationListener {splashScreenView ->
                 val animScaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 8f)
@@ -133,6 +136,19 @@ class MainActivity : AppCompatActivity() {
             moveDuration = 1000
             changeDuration = 100
         }
+
+        val alphaAdapter = AlphaInAnimationAdapter(adapter!!)
+        rv.adapter = ScaleInAnimationAdapter(alphaAdapter).apply {
+            setDuration(2000)
+            setInterpolator(OvershootInterpolator())
+            setFirstOnly(false)
+        }
+
+        /*rv.adapter  = SlideInBottomAnimationAdapter(adapter!!).apply {
+            setDuration(1000)
+            setInterpolator(OvershootInterpolator())
+            setFirstOnly(false)
+        }*/
 
         mBinding.floatingActionButton.setOnClickListener {
             testData.add("test")
