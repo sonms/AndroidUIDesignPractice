@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myappuidesignpractice.PostData
 import com.example.myappuidesignpractice.R
+import com.example.myappuidesignpractice.SearchAdapter
+import com.example.myappuidesignpractice.databinding.FragmentSecondBinding
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +29,10 @@ class SecondFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var manager : LinearLayoutManager = LinearLayoutManager(activity)
+    private lateinit var sBinding: FragmentSecondBinding
+    private var searchAdapter : SearchAdapter? = null
+    private var searchTestData = ArrayList<PostData>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +45,23 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        sBinding = FragmentSecondBinding.inflate(inflater, container, false)
+
+
+        return sBinding.root
+    }
+
+    private fun initNoticeBoardRecyclerView() {
+
+        searchAdapter = SearchAdapter()
+        searchAdapter!!.searchData = searchTestData
+        sBinding.searchRV.adapter = searchAdapter
+        //레이아웃 뒤집기 안씀
+        //manager.reverseLayout = true
+        //manager.stackFromEnd = true
+        sBinding.searchRV.setHasFixedSize(true)
+        sBinding.searchRV.layoutManager = manager
+
     }
 
     companion object {
