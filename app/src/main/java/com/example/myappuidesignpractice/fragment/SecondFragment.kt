@@ -47,6 +47,10 @@ class SecondFragment : Fragment() {
     ): View? {
         sBinding = FragmentSecondBinding.inflate(inflater, container, false)
 
+        initNoticeBoardRecyclerView()
+
+
+        sBinding.searchEt
 
         return sBinding.root
     }

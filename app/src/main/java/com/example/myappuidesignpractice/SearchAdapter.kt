@@ -1,17 +1,20 @@
 package com.example.myappuidesignpractice
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myappuidesignpractice.databinding.PostItemBinding
 
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
+class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable{
     private lateinit var binding : PostItemBinding
     var searchData = ArrayList<PostData>()
     private lateinit var context : Context
-
+    var filterPost = ArrayList<PostData>()
     init {
         setHasStableIds(true)
     }
@@ -93,4 +96,46 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(){
         this.itemClickListener = itemClickListener
     }
 
+    override fun getFilter(): Filter {
+        return PostFilter()
+    }
+    inner class PostFilter : Filter() {
+        // 입력받은 문자열에 대한 처리
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            val filterString = constraint.toString()
+            val results = FilterResults()
+
+            //검색이 필요없을 경우를 위해 원본배열 복제
+            val filterList : ArrayList<PostData> = ArrayList()
+
+            //공벡제외 아무런 값도 입력하지 않았을 경우 ->원본배열
+            if (filterString.trim { it <= ' '}.isEmpty()) {
+                //필터링 작업으로 계산된 모든 값
+                results.values = searchData
+                //필터링 작업으로 계산된 값의 수
+                results.count = searchData.size
+                return results
+
+                //20글자 수 이하일 때 -> 이메일로 검색
+            } else if (filterString.trim {it <= ' '}.length <= 20) {
+                for (searchEmail in searchData) {
+                    if (searchEmail.postContent.contains(filterString)) {
+                        filterList.add(searchEmail)
+                    }
+                }
+            }
+            results.values = filterList
+            results.count = filterList.size
+
+            return results
+        }
+
+        //처리에 대한 결과물
+        @SuppressLint("NotifyDataSetChanged")
+        override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+            filterPost.clear()
+            filterPost.addAll(results.values as ArrayList<PostData>)
+            notifyDataSetChanged()
+        }
+    }
 }
