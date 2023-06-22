@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MyAppUIDesignPractice"
         tools:targetApi="31">
         <activity
-            android:name=".SearchTestActivity"
+            android:name=".fragment.SearchTestActivity"
             android:exported="false" />
         <activity
             android:name=".ChatListActivity"

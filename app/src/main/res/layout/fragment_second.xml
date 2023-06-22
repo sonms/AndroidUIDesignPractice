@@ -6,31 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".fragment.SecondFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/searchview_custom_background"
-        android:imeOptions="actionSearch"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        app:queryHint="검색"
-        app:queryBackground="@drawable/searchview_custom_background"
-        app:closeIcon="@drawable/baseline_cancel_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_RV"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_et"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/post_item"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

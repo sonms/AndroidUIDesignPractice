@@ -20,7 +20,7 @@
             android:layout_width="67dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/account_menu" />
+            android:src="@drawable/baseline_directions_car_24" />
 
         <TextView
             android:id="@+id/account_id"

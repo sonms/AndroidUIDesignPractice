@@ -13,10 +13,16 @@ import com.example.myappuidesignpractice.databinding.PostItemBinding
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable{
     private lateinit var binding : PostItemBinding
     var searchData = ArrayList<PostData>()
+    var searchTempData =  ArrayList<PostData>()
     private lateinit var context : Context
     var filterPost = ArrayList<PostData>()
+    var itemFilter = PostFilter()
+
     init {
         setHasStableIds(true)
+        if (searchData.isNotEmpty()) {
+            searchTempData = searchData
+        }
     }
 
     inner class SearchViewHolder(private val binding : PostItemBinding ) : RecyclerView.ViewHolder(binding.root) {
@@ -97,7 +103,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Fi
     }
 
     override fun getFilter(): Filter {
-        return PostFilter()
+        return itemFilter
     }
     inner class PostFilter : Filter() {
         // 입력받은 문자열에 대한 처리
@@ -111,16 +117,16 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Fi
             //공벡제외 아무런 값도 입력하지 않았을 경우 ->원본배열
             if (filterString.trim { it <= ' '}.isEmpty()) {
                 //필터링 작업으로 계산된 모든 값
-                results.values = searchData
+                results.values = searchTempData
                 //필터링 작업으로 계산된 값의 수
-                results.count = searchData.size
+                results.count = searchTempData.size
                 return results
 
                 //20글자 수 이하일 때 -> 이메일로 검색
             } else if (filterString.trim {it <= ' '}.length <= 20) {
-                for (searchEmail in searchData) {
-                    if (searchEmail.postContent.contains(filterString)) {
-                        filterList.add(searchEmail)
+                for (search in searchData) {
+                    if (search.postContent.contains(filterString)) {
+                        filterList.add(search)
                     }
                 }
             }
@@ -133,8 +139,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Fi
         //처리에 대한 결과물
         @SuppressLint("NotifyDataSetChanged")
         override fun publishResults(constraint: CharSequence?, results: FilterResults) {
-            filterPost.clear()
-            filterPost.addAll(results.values as ArrayList<PostData>)
+            searchData.clear()
+            searchData.addAll(results.values as ArrayList<PostData>)
+            println(searchData)
             notifyDataSetChanged()
         }
     }

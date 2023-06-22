@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.myappuidesignpractice.databinding.ActivityMainBinding
 import com.example.myappuidesignpractice.fragment.FirstFragment
+import com.example.myappuidesignpractice.fragment.SearchTestActivity
 import com.example.myappuidesignpractice.fragment.SecondFragment
 import com.example.myappuidesignpractice.fragment.ThirdFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
@@ -151,9 +152,15 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         mBinding.floatingActionButton.setOnClickListener {
-            testData.add("test")
+            /*testData.add("test")
             adapter.notifyItemInserted(position)
-            position += 1
+            position += 1*/
+
+            val intent = Intent(this, SearchTestActivity::class.java).apply {
+
+            }
+            startActivity(intent)
+
         }
 
         val indicator : WormDotsIndicator = mBinding.springDot

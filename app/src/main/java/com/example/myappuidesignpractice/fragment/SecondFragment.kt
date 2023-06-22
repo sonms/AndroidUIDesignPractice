@@ -50,21 +50,20 @@ class SecondFragment : Fragment() {
         initNoticeBoardRecyclerView()
 
 
-        sBinding.searchEt
 
         return sBinding.root
     }
 
     private fun initNoticeBoardRecyclerView() {
 
-        searchAdapter = SearchAdapter()
+        /*searchAdapter = SearchAdapter()
         searchAdapter!!.searchData = searchTestData
         sBinding.searchRV.adapter = searchAdapter
         //레이아웃 뒤집기 안씀
         //manager.reverseLayout = true
         //manager.stackFromEnd = true
         sBinding.searchRV.setHasFixedSize(true)
-        sBinding.searchRV.layoutManager = manager
+        sBinding.searchRV.layoutManager = manager*/
 
     }
 
