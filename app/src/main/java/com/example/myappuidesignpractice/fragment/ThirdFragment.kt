@@ -38,6 +38,18 @@ class ThirdFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_third, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (arguments != null)
+        {
+            val t = requireArguments()!!.getString("title"); // 프래그먼트1에서 받아온 값 넣기
+            println(t)
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
