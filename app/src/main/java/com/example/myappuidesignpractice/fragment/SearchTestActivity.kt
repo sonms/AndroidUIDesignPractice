@@ -40,11 +40,11 @@ class SearchTestActivity : AppCompatActivity() {
                         searchAdapter!!.notifyDataSetChanged()
                     } else {
                         searchAdapter!!.filter.filter(s)
-                        val df = ThirdFragment()
+                        /*val df = ThirdFragment()
                         val bundle = Bundle()
                         bundle.putString("title", s)
 
-                        df.arguments = bundle
+                        df.arguments = bundle*/
                     }
                     Log.d("this", "SearchVies Text is changed : $s")
                     return false
