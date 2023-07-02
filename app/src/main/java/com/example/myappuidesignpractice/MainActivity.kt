@@ -193,6 +193,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        mBinding.sharebtn.setOnClickListener {
+            shareContent()
+        }
+    }
+
+    fun shareContent() {
+        val userEmail = "email11"
+
+//공유 가능한 앱들을 실행하는 Action값으로 intent생성
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, userEmail)
+            type = "text/plain" //type은 image, text, video등이 존재
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     override fun onRequestPermissionsResult(
