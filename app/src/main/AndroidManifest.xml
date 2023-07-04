@@ -21,7 +21,11 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".fragment.SearchTestActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ChatListActivity"
             android:exported="false" />
