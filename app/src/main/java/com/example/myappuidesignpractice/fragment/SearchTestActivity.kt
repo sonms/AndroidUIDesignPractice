@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,5 +76,16 @@ class SearchTestActivity : AppCompatActivity() {
         sBinding.searchRV.setHasFixedSize(true)
         sBinding.searchRV.layoutManager = manager
 
+    }
+    private fun deepLink() {
+        //토스 스킴값 supertoss://
+        /*WEB_VIEW.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean {
+                return shouldOverrideUrlLoading(view, request)
+            }
+        }*/
     }
 }
