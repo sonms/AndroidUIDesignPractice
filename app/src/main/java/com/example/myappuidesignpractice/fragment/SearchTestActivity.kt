@@ -1,5 +1,7 @@
 package com.example.myappuidesignpractice.fragment
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myappuidesignpractice.PostData
 import com.example.myappuidesignpractice.SearchAdapter
 import com.example.myappuidesignpractice.databinding.ActivitySearchTestBinding
+import java.net.URISyntaxException
 
 
 class SearchTestActivity : AppCompatActivity() {
@@ -88,4 +91,71 @@ class SearchTestActivity : AppCompatActivity() {
             }
         }*/
     }
+
+    /*fun initViews() {
+        WEB_VIEW.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean {
+                return shouldOverrideUrlLoading(view, request)
+            }
+        }
+    }
+
+    private fun shouldOverrideUrlLoading(view: WebView, url: String) : Boolean {
+        url?.let {
+            if (!URLUtil.isNetworkUrl(url) && !URLUtil.isJavaScriptUrl(url)) {
+                // 딥링크로 URI 객체 만들기
+                val uri = try {
+                    Uri.parse(url)
+                } catch (e: Exception) {
+                    return false
+                }
+
+                return when (uri.scheme) {
+                    "intent" -> {
+                        startSchemeIntent(it) // Intent 스킴인 경우
+                    }
+                    else -> {
+                        return try {
+                            startActivity(Intent(Intent.ACTION_VIEW, uri)) // 다른 딥링크 스킴이면 실행
+                            true
+                        } catch (e: java.lang.Exception) {
+                            false
+                        }
+                    }
+                }
+            } else {
+                return false
+            }
+        } ?: return false
+    }
+
+
+    *//*Intent 스킴을 처리하는 함수*//*
+    fun startSchemeIntent(url: String): Boolean {
+        val schemeIntent: Intent = try {
+            Intent.parseUri(url, Intent.URI_INTENT_SCHEME) // Intent 스킴을 파싱
+        } catch (e: URISyntaxException) {
+            return false
+        }
+        try {
+            startActivity(schemeIntent) // 앱으로 이동
+            return true
+        } catch (e: ActivityNotFoundException) { // 앱이 설치 안 되어 있는 경우
+            val packageName = schemeIntent.getPackage()
+
+            if (!packageName.isNullOrBlank()) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=$packageName") // 스토어로 이동
+                    )
+                )
+                return true
+            }
+        }
+        return false
+    }*/
 }
