@@ -15,6 +15,7 @@ import android.view.animation.AnticipateOvershootInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.animation.doOnEnd
@@ -38,6 +39,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
@@ -88,6 +91,7 @@ class MainActivity : AppCompatActivity() {
     private val TAG_B = "b_fragment"
     private val TAG_C = "c_fragment"
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         //안드로이드 버전이 S이상일때만 적용
         //initSplashScreen()
@@ -195,7 +199,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         mBinding.sharebtn.setOnClickListener {
-            shareContent()
+            //shareContent()
+            val s = "2023년/7월/10일"
+            val selectFormattedDate = LocalDate.parse(s, DateTimeFormatter.ofPattern("yyyy년/M월/d일")).format(
+                DateTimeFormatter.ISO_DATE)
+
+            println(selectFormattedDate)
+            println(s)
         }
     }
 
