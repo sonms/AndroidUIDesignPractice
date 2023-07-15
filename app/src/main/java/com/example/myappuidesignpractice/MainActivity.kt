@@ -207,6 +207,13 @@ class MainActivity : AppCompatActivity() {
             println(selectFormattedDate)
             println(s)
         }
+
+        mBinding.scrolltestbtn.setOnClickListener {
+            val intent = Intent(this, ScrollTestActivity::class.java)
+
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun shareContent() {

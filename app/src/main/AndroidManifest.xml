@@ -20,6 +20,9 @@
         android:theme="@style/Theme.MyAppUIDesignPractice"
         tools:targetApi="31">
         <activity
+            android:name=".ScrollTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
@@ -27,7 +30,7 @@
             android:name=".fragment.SearchTestActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name= "android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
