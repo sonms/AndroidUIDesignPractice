@@ -204,7 +204,12 @@ class MainActivity : AppCompatActivity() {
             val selectFormattedDate = LocalDate.parse(s, DateTimeFormatter.ofPattern("yyyy년/M월/d일")).format(
                 DateTimeFormatter.ISO_DATE)
 
+            val s1 = "2023년/7월/10일"
+            val selectFormattedDate1 = LocalDate.parse(s, DateTimeFormatter.ofPattern("yyyy년/M월/d일")).format(
+                DateTimeFormatter.ISO_INSTANT)
+
             println(selectFormattedDate)
+            println(selectFormattedDate1)
             println(s)
         }
 
