@@ -33,14 +33,17 @@ import com.example.myappuidesignpractice.fragment.ThirdFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
-import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -204,12 +207,24 @@ class MainActivity : AppCompatActivity() {
             val selectFormattedDate = LocalDate.parse(s, DateTimeFormatter.ofPattern("yyyy년/M월/d일")).format(
                 DateTimeFormatter.ISO_DATE)
 
-            val s1 = "2023년/7월/10일"
-            val selectFormattedDate1 = LocalDate.parse(s, DateTimeFormatter.ofPattern("yyyy년/M월/d일")).format(
-                DateTimeFormatter.ISO_INSTANT)
+            val now = System.currentTimeMillis()
+            val date = Date(now)
+            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA)
+            val currentDate = sdf.format(date)
+
+
+            val formatter = DateTimeFormatter
+                .ofPattern("yyyy-MM-dd HH:mm:ss")
+                .withZone(ZoneId.systemDefault())
+            val result: Instant = Instant.from(formatter.parse(currentDate))
+
+
+            /*val currentFormattedDate = LocalDate.parse(currentDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).format(
+                DateTimeFormatter.ISO_INSTANT)*/
 
             println(selectFormattedDate)
-            println(selectFormattedDate1)
+            //println(currentFormattedDate)
+            println(result)
             println(s)
         }
 
