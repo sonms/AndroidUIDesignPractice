@@ -14,7 +14,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:stickyHeader="@id/header_view">
+        app:stickyHeader="@id/header_view"
+        app:stickyFooter="@id/fix_bottom"
+        >
 
         <FrameLayout
 
@@ -127,6 +129,20 @@
                     android:gravity="center"
                     android:text="7" />
 
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/fix_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+
+                <Button
+                    android:id="@+id/teb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent" />
             </LinearLayout>
 
         </FrameLayout>
