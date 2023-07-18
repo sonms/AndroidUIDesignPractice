@@ -10,17 +10,16 @@
         android:id="@+id/search_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/searchview_custom_background"
-        android:imeOptions="actionSearch"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        app:queryHint="검색"
-        app:queryBackground="@drawable/searchview_custom_background"
+        android:imeOptions="actionSearch"
         app:closeIcon="@drawable/baseline_cancel_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@drawable/searchview_custom_background"
+        app:queryHint="검색" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_RV"
@@ -32,5 +31,12 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/post_item"/>
 
+    <Button
+        android:id="@+id/stestb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="516dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_et" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

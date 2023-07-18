@@ -2,6 +2,7 @@ package com.example.myappuidesignpractice.fragment
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -57,7 +58,9 @@ class SearchTestActivity : AppCompatActivity() {
                 }
             }
         sBinding.searchEt.setOnQueryTextListener(searchViewTextListener)
-
+        sBinding.stestb.setOnClickListener {
+            deepLink()
+        }
         setContentView(sBinding.root)
     }
 
@@ -90,6 +93,18 @@ class SearchTestActivity : AppCompatActivity() {
                 return shouldOverrideUrlLoading(view, request)
             }
         }*/
+
+        val action: String? = intent?.action
+        val data: Uri? = intent?.data
+        val intent = packageManager.getLaunchIntentForPackage("com.ul.toss.im")
+        startActivity(intent)
+        // uitest://deeplink?date=20210206&message=전체 세미나
+        if (action == Intent.ACTION_VIEW) {
+            val date = data?.getQueryParameter("date")  //20210206
+            val message = data?.getQueryParameter("message") //전체 세미나
+            println(date)
+
+        }
     }
 
     /*fun initViews() {
