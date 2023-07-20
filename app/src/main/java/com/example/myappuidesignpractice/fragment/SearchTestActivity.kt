@@ -96,8 +96,8 @@ class SearchTestActivity : AppCompatActivity() {
 
         val action: String? = intent?.action
         val data: Uri? = intent?.data
-        val intent = packageManager.getLaunchIntentForPackage("com.ul.toss.im")
-        startActivity(intent)
+        //val intent = packageManager.getLaunchIntentForPackage("com.ul.toss.im")
+
         // uitest://deeplink?date=20210206&message=전체 세미나
         if (action == Intent.ACTION_VIEW) {
             val date = data?.getQueryParameter("date")  //20210206
@@ -105,6 +105,11 @@ class SearchTestActivity : AppCompatActivity() {
             println(date)
 
         }
+        //startActivity(intent)
+        val uri = Uri.parse("해당 앱의 DeepLink - scheme://host")
+        val i = Intent(Intent.ACTION_VIEW, uri)
+        i.setPackage("해당앱의 패키지명")
+        startActivity(i)
     }
 
     /*fun initViews() {
