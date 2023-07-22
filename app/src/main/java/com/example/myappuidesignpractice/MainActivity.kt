@@ -234,6 +234,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        mBinding.recyclerviewTestbtn.setOnClickListener {
+            val intent = Intent(this, ChattingActivity::class.java)
+
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun shareContent() {
