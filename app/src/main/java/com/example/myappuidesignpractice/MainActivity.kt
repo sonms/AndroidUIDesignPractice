@@ -222,11 +222,11 @@ class MainActivity : AppCompatActivity() {
             val nowFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(currentDate)
             val beforeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2023-07-21 11:23:12")
 
-            val diffMilliseconds = nowFormat.time - beforeFormat.time
-            val diffSeconds = diffMilliseconds / 1000
-            val diffMinutes = diffMilliseconds / (60 * 1000)
-            val diffHours = diffMilliseconds / (60 * 60 * 1000)
-            val diffDays = diffMilliseconds / (24 * 60 * 60 * 1000)
+            val diffMilliseconds = nowFormat?.time?.minus(beforeFormat?.time!!)
+            val diffSeconds = diffMilliseconds?.div(1000)
+            val diffMinutes = diffMilliseconds?.div((60 * 1000))
+            val diffHours = diffMilliseconds?.div((60 * 60 * 1000))
+            val diffDays = diffMilliseconds?.div((24 * 60 * 60 * 1000))
 
             println(selectFormattedDate)
             //println(currentFormattedDate)
