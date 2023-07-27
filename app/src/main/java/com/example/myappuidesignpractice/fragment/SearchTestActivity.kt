@@ -106,9 +106,9 @@ class SearchTestActivity : AppCompatActivity() {
 
         }
         //startActivity(intent)
-        val uri = Uri.parse("해당 앱의 DeepLink - scheme://host")
+        val uri = Uri.parse("~uitest://deeplink")
         val i = Intent(Intent.ACTION_VIEW, uri)
-        i.setPackage("해당앱의 패키지명")
+        i.setPackage("viva.republica.toss")
         startActivity(i)
     }
 
