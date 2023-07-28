@@ -21,15 +21,26 @@
         app:queryBackground="@drawable/searchview_custom_background"
         app:queryHint="검색" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_RV"
-        android:layout_width="0dp"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_swipe_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_et"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/post_item"/>
+        app:layout_constraintTop_toBottomOf="@+id/search_et">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_RV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_et"
+            tools:listitem="@layout/post_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/stestb"

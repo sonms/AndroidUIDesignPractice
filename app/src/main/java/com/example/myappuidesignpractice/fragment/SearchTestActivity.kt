@@ -4,9 +4,13 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -61,9 +65,32 @@ class SearchTestActivity : AppCompatActivity() {
         sBinding.stestb.setOnClickListener {
             deepLink()
         }
+
+        searchAdapter!!.setItemClickListener(object : SearchAdapter.ItemClickListener {
+            override fun onClick(view: View, position: Int, itemId: Int) {
+                println("cacalclaclca")
+            }
+
+        })
+
         setContentView(sBinding.root)
     }
 
+    private fun initSwipeRefresh() {
+        sBinding.refreshSwipeLayout.setOnRefreshListener {
+            //새로고침 시 터치불가능하도록
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed({
+                setData()
+                searchAdapter!!.searchData = searchTestData
+                //noticeBoardAdapter.recyclerView.startLayoutAnimation()
+                sBinding.refreshSwipeLayout.isRefreshing = false
+                searchAdapter!!.notifyDataSetChanged()
+            }, 1000)
+            //터치불가능 해제ss
+            //activity?.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+    }
     private fun setData() {
         searchTestData.add(PostData("a", 0, "s", "ssssdsf", "dsf", "sdf"))
         searchTestData.add(PostData("b", 1, "ss", "qqqq", "dsf", "sdf"))

@@ -69,6 +69,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     //sticky
     implementation 'com.github.amarjain07:StickyScrollView:1.0.3'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
