@@ -2,7 +2,9 @@ package com.example.myappuidesignpractice.fragment
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,6 +16,8 @@ import android.view.WindowManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +34,7 @@ class SearchTestActivity : AppCompatActivity() {
     }
     private var searchAdapter : SearchAdapter? = null
     private var searchTestData = ArrayList<PostData>()
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -110,33 +115,34 @@ class SearchTestActivity : AppCompatActivity() {
         sBinding.searchRV.layoutManager = manager
 
     }
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun deepLink() {
-        //토스 스킴값 supertoss://
-        /*WEB_VIEW.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?
-            ): Boolean {
-                return shouldOverrideUrlLoading(view, request)
-            }
-        }*/
+        // 딥링크 URI를 정확히 작성해야 합니다.
+        val uri = Uri.parse("uitest://deeplink?cost=10000")
 
-        val action: String? = intent?.action
-        val data: Uri? = intent?.data
-        //val intent = packageManager.getLaunchIntentForPackage("com.ul.toss.im")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
 
-        // uitest://deeplink?date=20210206&message=전체 세미나
-        if (action == Intent.ACTION_VIEW) {
-            val date = data?.getQueryParameter("date")  //20210206
-            val message = data?.getQueryParameter("message") //전체 세미나
-            println(date)
+        // 토스 앱의 패키지 이름을 알아야 합니다.
+        val tossPackageName = "viva.republica.toss"
 
+        // 토스 앱이 설치되어 있는지 확인하고 실행합니다.
+        if (isPackageInstalled(tossPackageName)) {
+            intent.setPackage(tossPackageName)
+            startActivity(intent)
+        } else {
+            // 토스 앱이 설치되어 있지 않은 경우 처리할 내용을 여기에 추가합니다.
+            Toast.makeText(this, "토스 앱이 설치되어 있지 않습니다.", Toast.LENGTH_SHORT).show()
         }
-        //startActivity(intent)
-        val uri = Uri.parse("~uitest://deeplink")
-        val i = Intent(Intent.ACTION_VIEW, uri)
-        i.setPackage("viva.republica.toss")
-        startActivity(i)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun isPackageInstalled(packageName: String): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 
     /*fun initViews() {
