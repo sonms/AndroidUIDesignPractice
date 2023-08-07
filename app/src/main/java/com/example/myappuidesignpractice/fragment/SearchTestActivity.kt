@@ -1,13 +1,11 @@
 package com.example.myappuidesignpractice.fragment
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -68,6 +66,17 @@ class SearchTestActivity : AppCompatActivity() {
             }
         sBinding.searchEt.setOnQueryTextListener(searchViewTextListener)
         sBinding.stestb.setOnClickListener {
+            val vibration = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val vbManager =
+                    getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                vbManager.defaultVibrator
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemService(VIBRATOR_SERVICE) as Vibrator
+            }
+            if (vibration.hasVibrator()) {
+                vibration.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
+            }
             deepLink()
         }
 
