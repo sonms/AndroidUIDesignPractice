@@ -19,7 +19,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:queryBackground="@drawable/searchview_custom_background"
-        app:queryHint="검색" />
+
+        app:queryHint="검색"
+        >
+        <requestFocus />
+    </androidx.appcompat.widget.SearchView>
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

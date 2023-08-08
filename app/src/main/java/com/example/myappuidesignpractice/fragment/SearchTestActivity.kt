@@ -1,19 +1,13 @@
 package com.example.myappuidesignpractice.fragment
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.*
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myappuidesignpractice.PostData
 import com.example.myappuidesignpractice.SearchAdapter
 import com.example.myappuidesignpractice.databinding.ActivitySearchTestBinding
-import java.net.URISyntaxException
 
 
 class SearchTestActivity : AppCompatActivity() {
@@ -32,11 +25,26 @@ class SearchTestActivity : AppCompatActivity() {
     }
     private var searchAdapter : SearchAdapter? = null
     private var searchTestData = ArrayList<PostData>()
+    private var type = ""
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initNoticeBoardRecyclerView()
+
+        type = intent.getStringExtra("type") as String
+
+        if (type == "test") {
+            //sBinding.searchEt.requestFocus()
+            sBinding.searchEt.isIconified = false;
+            val imm: InputMethodManager =
+                getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
+            imm.toggleSoftInput(
+                InputMethodManager.SHOW_FORCED,
+                InputMethodManager.HIDE_IMPLICIT_ONLY
+            )
+        }
 
         var searchViewTextListener: SearchView.OnQueryTextListener =
             object : SearchView.OnQueryTextListener {
@@ -77,6 +85,7 @@ class SearchTestActivity : AppCompatActivity() {
             if (vibration.hasVibrator()) {
                 vibration.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
             }
+
             deepLink()
         }
 

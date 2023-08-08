@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity() {
             position += 1*/
 
             val intent = Intent(this, SearchTestActivity::class.java).apply {
-
+                putExtra("type", "test")
             }
             startActivity(intent)
 
