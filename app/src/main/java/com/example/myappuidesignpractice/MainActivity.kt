@@ -250,6 +250,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        mBinding.btbtn.setOnClickListener {
+            //버튼 동적 추가
+        }
     }
 
     fun shareContent() {

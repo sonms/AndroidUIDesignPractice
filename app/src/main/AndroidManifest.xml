@@ -10,6 +10,7 @@
     </queries>
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAppUIDesignPractice"
         tools:targetApi="31">
+        <activity
+            android:name=".AddBtnActivity"
+            android:exported="false" />
         <activity
             android:name=".ScrollTestActivity"
             android:exported="false" />
@@ -36,7 +40,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!--host와 scheme이 이렇게 설정되었다면 ~uitest://deeplink~ 라는 URI는 무조건 해당 Activity가 실행됩니다.-->
+                <!-- host와 scheme이 이렇게 설정되었다면 ~uitest://deeplink~ 라는 URI는 무조건 해당 Activity가 실행됩니다. -->
                 <data
                     android:host="deeplink"
                     android:scheme="uitest" />

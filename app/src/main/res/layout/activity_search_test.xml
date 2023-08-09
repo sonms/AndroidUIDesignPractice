@@ -22,7 +22,6 @@
 
         app:queryHint="검색"
         >
-        <requestFocus />
     </androidx.appcompat.widget.SearchView>
 
 
