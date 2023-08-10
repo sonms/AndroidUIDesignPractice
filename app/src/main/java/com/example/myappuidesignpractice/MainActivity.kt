@@ -1,9 +1,12 @@
 package com.example.myappuidesignpractice
 
+import android.R
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.transition.ChangeBounds
@@ -13,7 +16,9 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
 import android.view.animation.AnticipateOvershootInterpolator
 import android.view.animation.OvershootInterpolator
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +49,8 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -187,9 +194,9 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.con.setOnClickListener {
             if (isDetailLayout) {
-                swapFrames(R.layout.activity_main)
+                swapFrames(com.example.myappuidesignpractice.R.layout.activity_main)
             } else {
-                swapFrames(R.layout.activity_main_detail)
+                swapFrames(com.example.myappuidesignpractice.R.layout.activity_main_detail)
             }
         }
 
@@ -253,7 +260,36 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.btbtn.setOnClickListener {
             //버튼 동적 추가
+            /*val t = Toast.makeText(this, "서비스의 필요한 권한입니다.\n권한에 동의해주세요.", Toast.LENGTH_SHORT).show()
+            var iv : ImageView? = ImageView(this).setImageDrawable(R.drawable.loading2)
+            iv = iv!!.setImageResource(R.drawable.loading2)*/
+
+            val toast = Toast.makeText(this, "t", Toast.LENGTH_SHORT).show()
+            val view = ImageView(this)
+            view.setImageResource(com.example.myappuidesignpractice.R.drawable.loading2)
+            /*toast.setView(view)
+            toast.show()*/
+            /*val toast1 : Toast = Toast.makeText(this, "text", Toast.LENGTH_SHORT).show()
+            val tv = toast.view!!.findViewById<View>(R.id.message) as TextView*/
+
+          /*  tv.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+            tv.setCompoundDrawablePadding(context.getResources().getDimensionPixelSize(R.dimen.padding_toast));*/
+
+            make(this, "text")
         }
+    }
+    fun make(context: Context?, message: String?) {
+        val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            val view = toast.view
+            view!!.setBackgroundResource(com.example.myappuidesignpractice.R.drawable.searchview_custom_background)
+            val text = view.findViewById<View>(R.id.message) as TextView
+            //text.setTextColor(context.getResources().getColor(R.color.white));
+            text.setTextColor(Color.parseColor("#FFFFFFFF"))
+            text.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            text.textSize = 14f
+        }
+        toast.show()
     }
 
     fun shareContent() {
@@ -398,7 +434,7 @@ class MainActivity : AppCompatActivity() {
         val bt = manager.beginTransaction()
 
         if (manager.findFragmentByTag(tag) == null) {
-            bt.add(R.id.fragmenttest, fragment, tag)
+            bt.add(com.example.myappuidesignpractice.R.id.fragmenttest, fragment, tag)
         }
 
         val f = manager.findFragmentByTag(TAG_A)
