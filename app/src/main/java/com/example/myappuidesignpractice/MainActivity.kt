@@ -276,6 +276,9 @@ class MainActivity : AppCompatActivity() {
             tv.setCompoundDrawablePadding(context.getResources().getDimensionPixelSize(R.dimen.padding_toast));*/
 
             make(this, "text")
+
+            val intent = Intent(this, AddBtnActivity::class.java)
+            startActivity(intent)
         }
     }
     fun make(context: Context?, message: String?) {
