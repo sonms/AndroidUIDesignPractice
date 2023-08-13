@@ -16,6 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/add"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="200dp"
+            android:layout_gravity="center|bottom"
+            android:text="addbtn" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

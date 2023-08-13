@@ -1,8 +1,10 @@
 package com.example.myappuidesignpractice
 
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import com.example.myappuidesignpractice.databinding.ActivityAddBtnBinding
 
 class AddBtnActivity : AppCompatActivity() {
@@ -13,14 +15,22 @@ class AddBtnActivity : AppCompatActivity() {
 
         setContentView(abinding.root)
 
-        val btn = Button(this).apply {
-            width = 200
-            height = 200
-            setOnClickListener {
-                println("ciclcc")
+        abinding.add.setOnClickListener {
+            val btn = Button(this).apply {
+                width = 100
+                height = 100
+                setOnClickListener {
+                    println("ciclcc")
+                }
+                setBackgroundResource(R.color.black)
+                setBackgroundResource(R.drawable.baseline_directions_car_24)
+                backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@AddBtnActivity, R.color.black))
             }
+            abinding.addBtnLl.addView(btn)
         }
 
-        abinding.addBtnLl.addView(btn)
+
+
+
     }
 }
