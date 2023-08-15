@@ -4,6 +4,7 @@ import android.R
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -21,6 +22,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.animation.doOnEnd
@@ -242,6 +244,8 @@ class MainActivity : AppCompatActivity() {
             //println("차이 ${currentDate - startDate}")
             println("hh" + diffHours)
             println("m" + diffMinutes)
+
+            makeDialog()
         }
 
         mBinding.scrolltestbtn.setOnClickListener {
@@ -293,6 +297,29 @@ class MainActivity : AppCompatActivity() {
             text.textSize = 14f
         }
         toast.show()
+    }
+
+    private fun makeDialog() {
+        val builder : AlertDialog.Builder = AlertDialog.Builder(this)
+        val ad : AlertDialog = builder.create()
+        builder.setTitle("테스스트트트")
+        builder.setMessage("정말로 삭제하시겠습니까?")
+        builder.setNegativeButton("예",
+            DialogInterface.OnClickListener { dialog, which ->
+                ad.dismiss()
+                //temp = listData[holder.adapterPosition]!!
+                //extraditeData()
+                //testData.add(temp)
+                //deleteServerData = tempServerData[holder.adapterPosition]!!.api_id
+                //removeServerData(deleteServerData!!)
+                //println(deleteServerData)
+            })
+
+        builder.setPositiveButton("아니오",
+            DialogInterface.OnClickListener { dialog, which ->
+                ad.dismiss()
+            })
+        builder.show()
     }
 
     fun shareContent() {
