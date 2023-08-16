@@ -302,6 +302,7 @@ class MainActivity : AppCompatActivity() {
     private fun makeDialog() {
         val builder : AlertDialog.Builder = AlertDialog.Builder(this)
         val ad : AlertDialog = builder.create()
+        //여기에 스타일 추가히기
         builder.setTitle("테스스트트트")
         builder.setMessage("정말로 삭제하시겠습니까?")
         builder.setNegativeButton("예",
