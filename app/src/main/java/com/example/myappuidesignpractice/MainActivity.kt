@@ -244,6 +244,7 @@ class MainActivity : AppCompatActivity() {
             //println("차이 ${currentDate - startDate}")
             println("hh" + diffHours)
             println("m" + diffMinutes)
+            println("dd" + diffDays)
 
             makeDialog()
         }
@@ -300,7 +301,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun makeDialog() {
-        val builder : AlertDialog.Builder = AlertDialog.Builder(this)
+        val builder : AlertDialog.Builder = AlertDialog.Builder(this).setView(R.layout.select_dialog_item)
         val ad : AlertDialog = builder.create()
         builder.setTitle("테스스트트트")
         builder.setMessage("정말로 삭제하시겠습니까?")
