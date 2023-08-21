@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
@@ -209,6 +210,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        mBinding.sharebtn.setOnLongClickListener {
+            Toast.makeText(this, "long", Toast.LENGTH_SHORT).show()
+
+            return@setOnLongClickListener true
+        }
 
         mBinding.sharebtn.setOnClickListener {
             //shareContent()
@@ -301,7 +307,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun makeDialog() {
-        val builder : AlertDialog.Builder = AlertDialog.Builder(this).setView(R.layout.select_dialog_item)
+        /*val builder : AlertDialog.Builder = AlertDialog.Builder(this)
         val ad : AlertDialog = builder.create()
         //여기에 스타일 추가히기
         builder.setTitle("테스스트트트")
@@ -321,7 +327,32 @@ class MainActivity : AppCompatActivity() {
             DialogInterface.OnClickListener { dialog, which ->
                 ad.dismiss()
             })
-        builder.show()
+        builder.show()*/
+
+        val layoutInflater = LayoutInflater.from(this)
+        //view는 여기서 다이얼로그에 맞게 수정 지금은 아님
+        val view = layoutInflater.inflate(R.layout.activity_list_item , null)
+        val alertDialog = android.app.AlertDialog.Builder(this,  com.example.myappuidesignpractice.R.style.CustomAlertDialog)
+            .setView(view)
+            .create()
+
+        //다이얼로그에 맞는 걸로 id값 가져오기
+        /*val dialogContent = view.findViewById<TextView>(R.id.dialog_tv)
+        val dialogLeftBtn = view.findViewById<View>(R.id.dialog_left_btn)
+        val dialogRightBtn =  view.findViewById<View>(R.id.dialog_right_btn)*/
+
+        /*dialogContent.text = "정말로 삭제하시겠습니까?"
+        //아니오
+        dialogLeftBtn.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        //예
+        dialogRightBtn.setOnClickListener {
+            alertDialog.dismiss()
+            deletePostData()
+            this@NoticeBoardReadActivity.finish()
+        }
+        alertDialog.show()*/
     }
 
     fun shareContent() {
