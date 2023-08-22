@@ -212,7 +212,12 @@ class MainActivity : AppCompatActivity() {
         }
         mBinding.sharebtn.setOnLongClickListener {
             Toast.makeText(this, "long", Toast.LENGTH_SHORT).show()
-
+            val fadeIn = ObjectAnimator.ofFloat(mBinding.sharebtn, "alpha", 0f, 1f)
+            fadeIn.duration = 1500
+            fadeIn.start()
+            /*val fadeOut = ObjectAnimator.ofFloat(imageView, "alpha", 1f, 0f)
+            fadeOut.duration = 1500
+            fadeOut.start()*/
             return@setOnLongClickListener true
         }
 
