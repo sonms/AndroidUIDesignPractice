@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+accelerate_interpolator = 느리고빠르게
+decelerate_interpolator = 빠르다 느려짐
+overshoot_interpolator = 마지막에서 한번더
+bounce_interpolator = 마지막에 통통튀김
+cycle_interpolator = 마지막에서 처음으로 돌아옴
+-->
 <rotate
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:interpolator="@android:anim/linear_interpolator"
