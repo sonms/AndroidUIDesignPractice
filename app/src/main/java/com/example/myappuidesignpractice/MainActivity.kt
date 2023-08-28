@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
@@ -307,6 +308,7 @@ class MainActivity : AppCompatActivity() {
             text.setTextColor(Color.parseColor("#FFFFFFFF"))
             text.textAlignment = View.TEXT_ALIGNMENT_CENTER
             text.textSize = 14f
+            toast.setGravity(Gravity.BOTTOM or Gravity.START, 0, 0)
         }
         toast.show()
     }
