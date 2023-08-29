@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.view.Gravity
@@ -309,6 +310,11 @@ class MainActivity : AppCompatActivity() {
             text.textAlignment = View.TEXT_ALIGNMENT_CENTER
             text.textSize = 14f
             toast.setGravity(Gravity.BOTTOM or Gravity.START, 0, 0)
+            text.text = "marquee tv"
+            text.setSingleLine()
+            text.ellipsize = TextUtils.TruncateAt.MARQUEE
+            text.marqueeRepeatLimit = -1 // -1은 무한
+            text.isSelected = true
         }
         toast.show()
     }
