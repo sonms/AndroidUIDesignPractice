@@ -15,12 +15,30 @@
         android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent">
 
+        <!--
+
+        android:scaleType - ImageView의 크기에 맞게 이미지 크기 조절 또는 이동.
+        > 아래의 값 중 하나를 지정.
+          -. matrix       (0) : 매트릭스를 사용하여 스케일. 이미지 커스터마이징 가능.
+          -. fitXY        (1) : 가로,세로 방향으로 ImageView에 가득 채움.
+          -. fitStart     (2) : 가로 또는 세로 중 한 방향으로 스케일.
+                                ImageView의 Start 기준으로 이미지 표시.
+          -. fitCenter    (3) : 가로 또는 세로 중 한 방향으로 스케일.
+                                ImageView의 Center 기준으로 이미지 표시.
+          -. fitEnd       (4) : 가로 또는 세로 중 한 방향으로 스케일.
+                                ImageView의 End 기준으로 이미지 표시.
+          -. center       (5) : 스케일 없이 이미지를 가운데 표시.
+          -. centerCrop   (6) : 이미지 비율을 유지한 상태로 스케일. ImageView를 벗어나는 부분은 잘라냄.
+          -. centerInside (7) : 이미지 비율을 유지한 상태로 스케일. ImageView를 벗어나지 않음.
+          -->
         <ImageView
             android:id="@+id/account_image"
             android:layout_width="67dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/baseline_directions_car_24" />
+            android:src="@drawable/baseline_directions_car_24"
+            android:scaleType="fitXY"
+            />
 
         <TextView
             android:id="@+id/account_id"
