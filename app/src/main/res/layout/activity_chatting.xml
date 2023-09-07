@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <ProgressBar
+        <!--<ProgressBar
             android:id="@+id/chat_pb"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:progressBackgroundTint="@color/black"
             android:progressTint="@color/colorAccent"
 
-            />
+            />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

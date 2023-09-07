@@ -24,7 +24,8 @@ class AddBtnActivity : AppCompatActivity() {
                 }
                 setBackgroundResource(R.color.black)
                 setBackgroundResource(R.drawable.baseline_directions_car_24)
-                backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@AddBtnActivity, R.color.black))
+                //색변경 겹침
+                //backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@AddBtnActivity, R.color.black))
             }
             abinding.addBtnLl.addView(btn)
         }

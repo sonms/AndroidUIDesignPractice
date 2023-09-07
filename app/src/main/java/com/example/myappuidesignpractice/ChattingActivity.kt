@@ -13,7 +13,7 @@ class ChattingActivity : AppCompatActivity() {
         mBinding = ActivityChattingBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        mBinding.messageSendIV.setOnClickListener {
+       /* mBinding.messageSendIV.setOnClickListener {
             //mBinding.chatPb.setProgress(70, true)
             // ObjectAnimator를 사용하여 진행률 애니메이션 생성
             val animator = ObjectAnimator.ofInt(mBinding.chatPb, "progress", 0, 100)
@@ -23,6 +23,8 @@ class ChattingActivity : AppCompatActivity() {
 
             // 애니메이션 시작
             animator.start()
-        }
+        }*/
+
+
     }
 }
