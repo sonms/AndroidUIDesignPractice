@@ -8,9 +8,11 @@
     >
 
     <LinearLayout
+        android:layout_marginStart="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +21,10 @@
         <TextView
             android:id="@+id/chat_tv2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="테스트"
+            android:textColor="@color/black"
+            />
 
     </LinearLayout>
 
