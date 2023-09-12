@@ -3,26 +3,39 @@ package com.example.myappuidesignpractice
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myappuidesignpractice.databinding.ChatItemBinding
 import com.example.myappuidesignpractice.databinding.ItemLayoutBinding
 
 class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
-    private lateinit var binding : ItemLayoutBinding
+    private lateinit var binding : ChatItemBinding
     var itemData = mutableListOf<String?>()
     private lateinit var context : Context
 
-    inner class ItemViewHolder(private val binding : ItemLayoutBinding ) : RecyclerView.ViewHolder(binding.root) {
+    private var chat2Adapter : Chat2Adapter? = null
+    var chat2ItemData = ArrayList<String>()
+    private var manager : LinearLayoutManager? = null
+
+
+    inner class ItemViewHolder(private val binding : ChatItemBinding ) : RecyclerView.ViewHolder(binding.root) {
         private var position : Int? = null
-        var tv_item = binding.itemTv
+
         fun bind(itemDataString: String, position : Int) {
+            chat2Adapter = Chat2Adapter()
+            manager = LinearLayoutManager(context)
+            binding.chat2Rv.setHasFixedSize(true)
+            binding.chat2Rv.layoutManager = manager
+            chat2Adapter!!.setReplyCommentData(chat2ItemData)
+
             this.position = position
-            tv_item.text = itemDataString
+            binding.chatTv.text = itemDataString
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         context = parent.context
-        binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ChatItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
     }
 

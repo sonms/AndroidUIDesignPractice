@@ -57,6 +57,13 @@
 
             />-->
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatting_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/chat_item"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
