@@ -16,7 +16,7 @@ class ChattingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityChattingBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        setData()
+        setInitReData()
        /* mBinding.messageSendIV.setOnClickListener {
             //mBinding.chatPb.setProgress(70, true)
             // ObjectAnimator를 사용하여 진행률 애니메이션 생성
@@ -31,7 +31,8 @@ class ChattingActivity : AppCompatActivity() {
 
     }
 
-    private fun setData() {
+    private fun setInitReData() {
+        setData()
         adapter = ChatAdapter()
         adapter!!.itemData = chatData
 
@@ -39,5 +40,11 @@ class ChattingActivity : AppCompatActivity() {
         mBinding.chattingRv.setHasFixedSize(true)
         mBinding.chattingRv.layoutManager = manager
 
+    }
+
+    private fun setData() {
+        chatData.add("1")
+        chatData.add("2")
+        chatData.add("3")
     }
 }
