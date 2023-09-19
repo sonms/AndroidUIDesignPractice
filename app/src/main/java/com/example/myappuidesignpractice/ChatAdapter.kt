@@ -2,6 +2,7 @@ package com.example.myappuidesignpractice
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,10 +44,22 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
         holder.bind(itemData[position]!!, position)
         //val content : SearchData = searchItemData[position]!!
         //holder.tv_date.text = content.scheduleText
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, holder.adapterPosition, chat2ItemData[holder.adapterPosition])
+        }
     }
 
     override fun getItemCount(): Int {
         return itemData.size
+    }
+
+    interface ItemClickListener {
+        fun onClick(view: View, position: Int, itemId: String)
+    }
+    private lateinit var itemClickListener: ItemClickListener
+
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
 
 }

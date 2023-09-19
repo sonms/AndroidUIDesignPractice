@@ -1,10 +1,15 @@
 package com.example.myappuidesignpractice
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myappuidesignpractice.databinding.ActivityChattingBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ChattingActivity : AppCompatActivity() {
     private lateinit var mBinding : ActivityChattingBinding
@@ -29,6 +34,11 @@ class ChattingActivity : AppCompatActivity() {
             animator.start()
         }*/
 
+        adapter!!.setItemClickListener(object : ChatAdapter.ItemClickListener {
+            override fun onClick(view: View, position: Int, itemId: String) {
+
+            }
+        })
     }
 
     private fun setInitReData() {
