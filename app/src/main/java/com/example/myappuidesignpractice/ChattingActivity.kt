@@ -34,8 +34,11 @@ class ChattingActivity : AppCompatActivity() {
             animator.start()
         }*/
 
+        //아이템 클릭 시 바꾸기
         adapter!!.setItemClickListener(object : ChatAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int, itemId: String) {
+                val temp = chatData[position]
+
 
             }
         })
