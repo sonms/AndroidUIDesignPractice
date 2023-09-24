@@ -18,6 +18,8 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
     var chat2ItemData = ArrayList<String>()
     private var manager : LinearLayoutManager? = null
 
+    //클릭된 아이템의 위치를 저장할 변수
+    private var selectedItem = -1
 
     inner class ItemViewHolder(private val binding : ChatItemBinding ) : RecyclerView.ViewHolder(binding.root) {
         private var position : Int? = null
@@ -44,8 +46,24 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
         holder.bind(itemData[position]!!, position)
         //val content : SearchData = searchItemData[position]!!
         //holder.tv_date.text = content.scheduleText
-        holder.itemView.setOnClickListener {
+        /*holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, holder.adapterPosition, chat2ItemData[holder.adapterPosition])
+        }*/
+        if (position == selectedItem) {
+            // 클릭된 아이템 디자인 변경 로직
+            // 예: itemContent.setTextColor(Color.RED)
+        } else {
+            // 클릭되지 않은 아이템 디자인 변경 로직
+            // 예: itemContent.setTextColor(Color.BLACK)
+        }
+
+        // 아이템 클릭 리스너 설정
+        binding.root.setOnClickListener {
+            val clickedPosition = holder.adapterPosition
+            if (clickedPosition != RecyclerView.NO_POSITION) {
+                selectedItem = clickedPosition // 클릭된 아이템 위치 업데이트
+                notifyDataSetChanged() // 어댑터 갱신 요청
+            }
         }
     }
 
