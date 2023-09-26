@@ -25,6 +25,7 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
         private var position : Int? = null
 
         fun bind(itemDataString: String, position : Int) {
+            //이중 리사이클러뷰
             chat2Adapter = Chat2Adapter()
             manager = LinearLayoutManager(context)
             binding.chat2Rv.setHasFixedSize(true)

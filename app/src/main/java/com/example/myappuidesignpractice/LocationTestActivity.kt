@@ -23,7 +23,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {
+class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {//구글맵
+
     private lateinit var mBinding : ActivityLocationTestBinding
     private val REQUEST_PERMISSION_LOCATION = 10
     //현재 위치를 가져오기 위한 변수
