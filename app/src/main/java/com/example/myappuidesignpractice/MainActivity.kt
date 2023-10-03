@@ -270,7 +270,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         mBinding.recyclerviewTestbtn.setOnClickListener {
-            val intent = Intent(this, ChattingActivity::class.java)
+            val intent = Intent(this, ChatListActivity::class.java)
 
             startActivity(intent)
             finish()

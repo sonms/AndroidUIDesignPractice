@@ -31,61 +31,64 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+
+    <LinearLayout
+        android:id="@+id/main_ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="55dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="620dp"
+        app:layout_constraintBottom_toTopOf="@+id/chat_bottom_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <!--<ProgressBar
-            android:id="@+id/chat_pb"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:max="100"
-            android:progressBackgroundTint="@color/black"
-            android:progressTint="@color/colorAccent"
-
-            />-->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatting_rv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/chat_item"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/chatting_item"
             />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+
+    <FrameLayout
+        android:id="@+id/set_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D3D2D2"
+        app:layout_constraintBottom_toBottomOf="@+id/main_ll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/set_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/loading_progress_icon" />
+
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/chat_bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <ImageView
+            android:id="@+id/add_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_add_24" />
+
         <EditText
-
             android:id="@+id/message_ET"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-
-            android:layout_marginEnd="55dp"
-            android:layout_marginRight="55dp"
+            android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/message_send_IV"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,13 +96,11 @@
 
         <ImageView
             android:id="@+id/message_send_IV"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_send_24" />
 
-            android:src="@drawable/baseline_send_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

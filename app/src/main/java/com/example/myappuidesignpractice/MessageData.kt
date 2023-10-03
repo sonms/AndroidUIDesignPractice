@@ -1,8 +1,10 @@
 package com.example.myappuidesignpractice
 
+import android.net.Uri
+
 data class MessageData(
+    var sendId : String,
     var message : String?,
-    var sendId : String?
-) {
-    constructor():this("","")
-}
+    var userImage : Uri?
+
+)
