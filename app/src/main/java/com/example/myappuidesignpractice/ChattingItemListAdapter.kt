@@ -32,10 +32,12 @@ class ChattingItemListAdapter : RecyclerView.Adapter<ChattingItemListAdapter.Ite
                 message.text = itemData.message!!.toString()
                 //userImage.setImageURI(Uri.parse(itemData.userImage!!.toString()))
                 user.text = itemData.sendId
+                user.textAlignment = View.TEXT_ALIGNMENT_VIEW_END
             } else {
                 message.text = itemData.message!!.toString()
                 //userImage.setImageURI(Uri.parse(itemData.userImage!!.toString()))
                 user.text = itemData.sendId
+                user.textAlignment = View.TEXT_ALIGNMENT_VIEW_END
             }
         }
     }
