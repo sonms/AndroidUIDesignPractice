@@ -81,4 +81,8 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
         this.itemClickListener = itemClickListener
     }
 
+    private fun setMultipleSelection(adapterPosition : Int) {
+        //if (itemData.get(adapterPosition).isSelected())
+    }
+
 }
