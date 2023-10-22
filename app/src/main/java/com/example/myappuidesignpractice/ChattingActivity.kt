@@ -94,6 +94,9 @@ class ChattingActivity : AppCompatActivity() {
             }
             adapter!!.notifyDataSetChanged()
         }
+
+
+
     }
 
     private fun setInitData() {

@@ -13,6 +13,8 @@ class AddBtnActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         abinding = ActivityAddBtnBinding.inflate(layoutInflater)
 
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.back_arrow_icon)
         setContentView(abinding.root)
 
         abinding.add.setOnClickListener {

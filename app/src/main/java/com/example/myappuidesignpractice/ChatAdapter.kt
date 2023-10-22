@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myappuidesignpractice.databinding.ChatItemBinding
@@ -17,6 +18,7 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
     private var chat2Adapter : Chat2Adapter? = null
     var chat2ItemData = ArrayList<String>()
     private var manager : LinearLayoutManager? = null
+
 
     //클릭된 아이템의 위치를 저장할 변수
     private var selectedItem = -1
@@ -65,6 +67,9 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
                 selectedItem = clickedPosition // 클릭된 아이템 위치 업데이트
                 notifyDataSetChanged() // 어댑터 갱신 요청
             }
+
+            setMultipleSelection(binding, itemData[clickedPosition], clickedPosition)
+            //onItemClickListener?.let { it(expense) }
         }
     }
 
@@ -81,8 +86,20 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
         this.itemClickListener = itemClickListener
     }
 
-    private fun setMultipleSelection(adapterPosition : Int) {
-        //if (itemData.get(adapterPosition).isSelected())
+    private fun setMultipleSelection(binding: ChatItemBinding , s: String?, adapterPosition : Int) {
+        if (itemData.contains(s)) {
+            itemData.remove(s)
+            changeBackground(binding, R.color.white)
+        } else {
+            itemData.add(s)
+            changeBackground(binding, R.color.purple_200)
+        }
     }
+
+    private fun changeBackground(binding: ChatItemBinding, resId: Int) {
+        binding.linearLayout2.setBackgroundColor(ContextCompat.getColor(binding.root.context, resId))
+    }
+
+
 
 }

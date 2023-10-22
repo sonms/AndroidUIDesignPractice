@@ -5,16 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myappuidesignpractice.Data.practiceData
 import com.example.myappuidesignpractice.databinding.ActivityChatListBinding
 
 class ChatListActivity : AppCompatActivity() {
     private lateinit var mBinding : ActivityChatListBinding
     private var adapter : ChatItemListAdapter? = null
 
-    private var itemList = ArrayList<String>()
+    private var itemList = ArrayList<practiceData>()
     private var manager : LinearLayoutManager = LinearLayoutManager(this)
     private var dataPos = 0
-
+    private var check = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +25,11 @@ class ChatListActivity : AppCompatActivity() {
 
         initChatList()
 
-        adapter!!.setItemClickListener(object : ChatItemListAdapter.ItemClickListener {
+        /*adapter!!.setItemClickListener(object : ChatItemListAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int, itemId: String) {
-                println("$position $itemId")
-                //chat으로 이동
-                val temp = itemList[position]
-                dataPos = position
-
-                val intent = Intent(this@ChatListActivity, ChattingActivity::class.java).apply {
-                    putExtra("name", temp)
-                }
-
-                startActivity(intent)
+                adapter!!.changeBackground()
             }
-        })
+        })*/
 
     }
 
@@ -54,8 +46,8 @@ class ChatListActivity : AppCompatActivity() {
     }
 
     private fun setData() {
-        itemList.add("a")
-        itemList.add("b")
-        itemList.add("c")
+        itemList.add(practiceData("a", false))
+        itemList.add(practiceData("b", false))
+        itemList.add(practiceData("c", false))
     }
 }
