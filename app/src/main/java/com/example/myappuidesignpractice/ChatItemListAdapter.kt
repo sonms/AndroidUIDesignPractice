@@ -33,9 +33,9 @@ class ChatItemListAdapter : RecyclerView.Adapter<ChatItemListAdapter.ItemViewHol
                     notifyDataSetChanged() // 어댑터 갱신 요청
                 }*/
 
+                //중복선택가능
                 setMultipleSelection(binding, itemData[clickedPosition].name, clickedPosition)
-                //onItemClickListener?.let { it(expense) }
-            }
+                //onItemClickListener?.let { it(expense) }            }
         }
     }
 
