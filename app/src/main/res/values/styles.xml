@@ -105,4 +105,24 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="CustomChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipStrokeColor">@color/colorAccent</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipBackgroundColor">@color/cardview_dark_background</item>
+        <item name="android:textColor">@color/black</item>
+
+        <item name="textStartPadding">8dp</item>
+        <item name="textEndPadding">8dp</item>
+        <item name="chipIconVisible">false</item>
+        <!--<item name="chipIconTint">@color/icon_tint_category_state</item>
+        <item name="chipIconSize">12dp</item>
+        <item name="iconStartPadding">6dp</item>-->
+        <item name="chipEndPadding">3dp</item>
+        <item name="android:theme">@style/ChipOverlayTheme</item>
+    </style>
+    <!--<item name="fontFamily">@font/pretendard_medium</item>-->
+
+    <style name="ChipOverlayTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Any other customization for this theme overlay -->
+    </style>
 </resources>

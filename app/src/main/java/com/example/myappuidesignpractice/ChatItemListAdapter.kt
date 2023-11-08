@@ -19,10 +19,10 @@ class ChatItemListAdapter : RecyclerView.Adapter<ChatItemListAdapter.ItemViewHol
     private lateinit var context : Context
     private var selectedItem = 0
 
-    inner class ItemViewHolder(private val binding : ItemLayoutBinding ) : RecyclerView.ViewHolder(binding.root) {
-        private var position : Int? = null
+    inner class ItemViewHolder(private var binding : ItemLayoutBinding ) : RecyclerView.ViewHolder(binding.root) {
+        private var position: Int? = null
         var tv_item = binding.itemTv
-        fun bind(itemDataString: practiceData, position : Int) {
+        fun bind(itemDataString: practiceData, position: Int) {
             this.position = position
             tv_item.text = itemDataString.name
 
@@ -36,6 +36,7 @@ class ChatItemListAdapter : RecyclerView.Adapter<ChatItemListAdapter.ItemViewHol
                 //중복선택가능
                 setMultipleSelection(binding, itemData[clickedPosition].name, clickedPosition)
                 //onItemClickListener?.let { it(expense) }            }
+            }
         }
     }
 
@@ -91,7 +92,6 @@ class ChatItemListAdapter : RecyclerView.Adapter<ChatItemListAdapter.ItemViewHol
             val colorStateList = ColorStateList.valueOf(ContextCompat.getColor(context , R.color.black)) //승인
             binding.itemLl.backgroundTintList = colorStateList
         }
-
     }
 
 }
