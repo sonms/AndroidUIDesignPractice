@@ -6,16 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ChipAndBottomNavigationTestActivity">
 
-    <!--<com.google.android.material.chip.Chip
-        android:id="@+id/chip"
+    <TextView
+        android:id="@+id/set_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/CustomChipStyle"
-        android:text="전체"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="시간 체크"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/date_picker_actions_btm"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/date_picker_actions_btm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="시간"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/read_set_filter_ll"
         android:layout_width="match_parent"

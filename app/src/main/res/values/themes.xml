@@ -9,9 +9,16 @@
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
+
+        <item name="android:timePickerStyle">@style/MyTimePickerStyle</item>
+
+        <!--다음으로 statusBarColor는 @color/white로 바꿔주고
+        windowLightStatusBar를 true로 설정하는 옵션을 추가해줍니다.
+        위 옵션의 기능은 상태 바 색상이 밝은색 일 때 상태 바에 있는 아이콘들이 잘 보이지 않기 때문에
+        상태 바 아이콘들의 색을 어둡게 바꿔주는 기능입니다.-->
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
