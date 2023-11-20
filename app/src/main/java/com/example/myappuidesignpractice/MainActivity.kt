@@ -298,6 +298,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddBtnActivity::class.java)
             startActivity(intent)
         }
+
+        mBinding.chiptestbtn.setOnClickListener {
+            val intent = Intent(this, ChipAndBottomNavigationTestActivity::class.java)
+            startActivity(intent)
+        }
     }
     fun make(context: Context?, message: String?) {
         val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)

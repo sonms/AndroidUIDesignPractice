@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ChipAndBottomNavigationTestActivity">
 
-    <com.google.android.material.chip.Chip
+    <!--<com.google.android.material.chip.Chip
         android:id="@+id/chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,6 +15,45 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
+    <LinearLayout
+        android:id="@+id/read_set_filter_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/read_set_filter_cg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!--<com.google.android.material.chip.Chip
+                style="@style/MioChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mio_blue_4"
+                android:text="등교"
+                />-->
+        </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/read_time_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
+            android:gravity="end"
+            android:text="10분 전"
+            android:textColor="@color/black" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
