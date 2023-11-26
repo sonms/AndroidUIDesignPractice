@@ -500,6 +500,12 @@ class MainActivity : AppCompatActivity() {
         mBinding.viewpager.registerOnPageChangeCallback(callback)
     }
 
+    /*private fun trigger() {
+        mBinding.viewpager.post {
+            mBinding.viewpager.findViewHolderForAdapterPosition(currentDatePos)?.itemView?.performClick()
+        }
+    }*/
+
 
     private fun initDataSet() : ArrayList<String> {
         var itemList = arrayListOf<String>()

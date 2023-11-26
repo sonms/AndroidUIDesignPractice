@@ -4,11 +4,15 @@ import android.app.TimePickerDialog
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import com.example.myappuidesignpractice.databinding.ActivityChipAndBottomNavigationTestBinding
 import com.google.android.material.chip.Chip
+import java.time.DayOfWeek
+import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
 import java.util.*
 
 class ChipAndBottomNavigationTestActivity : AppCompatActivity() {
@@ -71,6 +75,17 @@ class ChipAndBottomNavigationTestActivity : AppCompatActivity() {
             timePickerDialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
             */
             timePickerDialog.show()
+        }
+
+        binding.bottomTv.setOnClickListener {
+            val date = LocalDate.of(LocalDate.now().year, LocalDate.now().month, 3)
+            val dayOfWeek: DayOfWeek = date.dayOfWeek
+            val tempDayOfWeek = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)
+            println("${LocalDate.now().year.toString()} 오늘, ${tempDayOfWeek.toString().substring(0, 1)}, 3)")
+            println(LocalDate.now().monthValue.toString())
+            binding.bottomEt.requestFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(binding.bottomEt.findFocus(), InputMethodManager.SHOW_IMPLICIT)
         }
     }
 
