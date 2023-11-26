@@ -14,6 +14,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ChipAndBottomNavigationTestActivity : AppCompatActivity() {
     private lateinit var binding : ActivityChipAndBottomNavigationTestBinding
@@ -83,6 +84,16 @@ class ChipAndBottomNavigationTestActivity : AppCompatActivity() {
             val tempDayOfWeek = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN)
             println("${LocalDate.now().year.toString()} 오늘, ${tempDayOfWeek.toString().substring(0, 1)}, 3)")
             println(LocalDate.now().monthValue.toString())
+            val localDate = LocalDate.now()
+            val currentDate = localDate.toString().substring(8..9).toInt()
+            println(currentDate)
+
+            val temp = ArrayList<String>()
+            temp.add("a")
+            temp.add("b")
+            val s = temp.indexOf("a")
+            println(s)
+
             binding.bottomEt.requestFocus()
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(binding.bottomEt.findFocus(), InputMethodManager.SHOW_IMPLICIT)

@@ -500,11 +500,15 @@ class MainActivity : AppCompatActivity() {
         mBinding.viewpager.registerOnPageChangeCallback(callback)
     }
 
-    /*private fun trigger() {
+    private fun trigger() {
         mBinding.viewpager.post {
-            mBinding.viewpager.findViewHolderForAdapterPosition(currentDatePos)?.itemView?.performClick()
+            // 이동할 페이지의 인덱스를 지정합니다.
+            val targetPage = 2  // 이동하고 싶은 페이지의 인덱스
+
+            // setCurrentItem을 사용하여 페이지를 이동합니다.
+            mBinding.viewpager.setCurrentItem(targetPage, true)
         }
-    }*/
+    }
 
 
     private fun initDataSet() : ArrayList<String> {
@@ -611,4 +615,8 @@ class MainActivity : AppCompatActivity() {
         mBinding.frameLayout.layoutParams = pr
     }*/
 
+    override fun onStart() { //시작할때 뷰페이저 테스트
+        super.onStart()
+        trigger()
+    }
 }
