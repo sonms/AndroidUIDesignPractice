@@ -2,8 +2,10 @@ package com.example.myappuidesignpractice
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
+import com.example.myappuidesignpractice.fragment.FirstFragment
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -22,9 +24,15 @@ class SettingsActivity : AppCompatActivity() {
 
     class SettingsFragment : PreferenceFragmentCompat() {
         private var switch : SwitchPreferenceCompat? = null
+        private var prefer : Preference? = null
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
+            if (rootKey == null) {
+                // Preference 객체들 초기화
+                prefer = findPreference("test")
+            }
             switch = findPreference("sync")
             switch!!.setOnPreferenceChangeListener { preference, newValue ->
                 var isChecked = false
@@ -39,6 +47,14 @@ class SettingsActivity : AppCompatActivity() {
                 return@setOnPreferenceChangeListener true
             }
 
+            prefer?.setOnPreferenceClickListener {
+                val fm = requireActivity().supportFragmentManager
+                val ft = fm.beginTransaction()
+                ft.replace(R.id.settings, FirstFragment()).commit()
+
+
+                return@setOnPreferenceClickListener true
+            }
 
         }
     }

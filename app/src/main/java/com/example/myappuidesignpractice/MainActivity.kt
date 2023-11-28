@@ -223,6 +223,12 @@ class MainActivity : AppCompatActivity() {
             return@setOnLongClickListener true
         }
 
+        mBinding.settingbtn.setOnClickListener {
+            val intent = Intent(this@MainActivity, SettingsActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         mBinding.sharebtn.setOnClickListener {
             //shareContent()
             //isoDAte 형식

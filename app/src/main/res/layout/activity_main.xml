@@ -167,4 +167,16 @@
         app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/testbtn" />
+
+    <Button
+        android:id="@+id/settingbtn"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="208dp"
+        android:background="@color/colorAccent"
+        android:text="set"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/testbtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
