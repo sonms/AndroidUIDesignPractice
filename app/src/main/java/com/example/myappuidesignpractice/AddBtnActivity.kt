@@ -18,6 +18,7 @@ class AddBtnActivity : AppCompatActivity() {
         setContentView(abinding.root)
 
         abinding.add.setOnClickListener {
+            //버튼 레이아웃 설정
             val btn = Button(this).apply {
                 width = 100
                 height = 100
