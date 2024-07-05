@@ -13,6 +13,7 @@
         android:background="@drawable/searchview_custom_background"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:textColor="@color/colorAccent"
         android:imeOptions="actionSearch"
         app:closeIcon="@drawable/baseline_cancel_24"
         app:layout_constraintEnd_toEndOf="parent"

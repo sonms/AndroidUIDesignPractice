@@ -3,10 +3,14 @@ package com.example.myappuidesignpractice.fragment
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.net.Uri
 import android.os.*
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -26,6 +30,7 @@ class SearchTestActivity : AppCompatActivity() {
     private var searchAdapter : SearchAdapter? = null
     private var searchTestData = ArrayList<PostData>()
     private var type = ""
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +79,7 @@ class SearchTestActivity : AppCompatActivity() {
             }
         sBinding.searchEt.setOnQueryTextListener(searchViewTextListener)
         sBinding.stestb.setOnClickListener {
-            val vibration = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            /*val vibration = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 val vbManager =
                     getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
                 vbManager.defaultVibrator
@@ -86,7 +91,17 @@ class SearchTestActivity : AppCompatActivity() {
                 vibration.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
             }
 
-            deepLink()
+            deepLink()*/
+            sBinding.searchEt.isIconified = false
+            sBinding.searchEt.requestFocus()
+
+            val imm: InputMethodManager =
+                getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(
+                sBinding.searchEt,
+                InputMethodManager.HIDE_IMPLICIT_ONLY
+            )
+            Log.d("Focus", "EditText has focus: ${sBinding.searchEt.hasFocus()}")
         }
 
         searchAdapter!!.setItemClickListener(object : SearchAdapter.ItemClickListener {
@@ -229,4 +244,50 @@ class SearchTestActivity : AppCompatActivity() {
         }
         return false
     }*/
+
+    interface OnKeyboardVisibilityListener {
+        fun onVisibilityChanged(visible : Boolean)
+    }
+
+    private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
+        val parentView = (sBinding.root as ViewGroup).getChildAt(0)
+        parentView.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            private var alreadyOpen = false
+            private val defaultKeyboardHeightDP = 100
+            private val EstimatedKeyboardDP =
+                defaultKeyboardHeightDP + 48
+            private val rect = Rect()
+            override fun onGlobalLayout() {
+                val estimatedKeyboardHeight = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    EstimatedKeyboardDP.toFloat(),
+                    parentView.resources.displayMetrics
+                ).toInt()
+                parentView.getWindowVisibleDisplayFrame(rect)
+                val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
+                val isShown = heightDiff >= estimatedKeyboardHeight
+                if (isShown == alreadyOpen) {
+                    Log.i("Keyboard state", "Ignoring global layout change...")
+                    return
+                }
+                alreadyOpen = isShown
+                onKeyboardVisibilityListener.onVisibilityChanged(isShown)
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setKeyboardVisibilityListener(object : OnKeyboardVisibilityListener {
+            override fun onVisibilityChanged(visible: Boolean) {
+                if (visible) {
+                    Log.d("READ Keyboard test", "키보드 올리기")
+                } else {
+                    //키보드가 숨겨졌을 때
+                    Log.d("READ Keyboard test", "키보드 내리기")
+                }
+            }
+        })
+    }
 }

@@ -5,6 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScrollTestActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp">
+
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/baseline_add_24" />
+
+            <ImageView
+                android:id="@+id/read_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="14dp"
+                android:padding="8dp"
+                android:src="@drawable/splash_icon" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <com.amar.library.ui.StickyScrollView
         android:id="@+id/main_scroll"
@@ -13,15 +45,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:stickyHeader="@id/header_view"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:stickyFooter="@id/fix_bottom"
-        >
+        app:stickyHeader="@id/header_view">
 
-        <FrameLayout
-
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,7 +176,7 @@
                     android:background="@color/colorAccent" />
             </LinearLayout>
 
-        </FrameLayout>
+        </LinearLayout>
     </com.amar.library.ui.StickyScrollView>
 
 
