@@ -74,7 +74,7 @@ class CustomTimePickerDialog(private val context: Context, private val t : TimeP
     companion object {
         private const val HOUR = "hour"
         private const val MINUTE = "minute"
-
+        //설정한 시간 저장
         fun saveInstanceState(timePickerDialog: CustomTimePickerDialog): Bundle {
             val bundle = Bundle()
             val calendar = Calendar.getInstance()

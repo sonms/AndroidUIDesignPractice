@@ -49,14 +49,13 @@ class LocationTestActivity : AppCompatActivity(), OnMapReadyCallback {//구글�
         setContentView(mBinding.root)
         //이 메서드는 요청의 우선순위를 설정하여 Google Play 서비스 위치 서비스에 사용할 위치 소스에 관한 강력한 힌트를 제공합니다. 다음과 같은 값이 지원됩니다.
         //PRIORITY_HIGH_ACCURACY = 이 설정을 사용하여 가장 정확한 위치를 요청합니다. 이 설정을 사용하면 위치 서비스가 GPS를 사용하여 위치를 확인할 가능성이 높습니다.
-        //둘
         mLocationRequest =  LocationRequest.create().apply {
             interval = 10000 //앱에서 선호하는 위치 업데이트 수신 간격
             fastestInterval = 5000 //앱이 위치 업데이트를 가장 빠르게 처리할 수 있는 간격
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 
         }
-
+        //퍼미션 체크 
         val permissionCheckData = intent.getBooleanExtra("grant", false)
         mBinding.button.setOnClickListener {
             if (permissionCheckData || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {

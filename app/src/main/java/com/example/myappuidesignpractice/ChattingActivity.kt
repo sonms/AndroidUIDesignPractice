@@ -75,7 +75,7 @@ class ChattingActivity : AppCompatActivity() {
                 sendMessage = editable.toString()
             }
         })
-
+        //chat data set
         mBinding.messageSendIV.setOnClickListener {
             if (imageUri != null) {
                 CoroutineScope(Dispatchers.IO).launch {

@@ -52,13 +52,14 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ItemViewHolder>(){
         /*holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, holder.adapterPosition, chat2ItemData[holder.adapterPosition])
         }*/
-        if (position == selectedItem) {
+        //적용 x
+        /*if (position == selectedItem) {
             // 클릭된 아이템 디자인 변경 로직
             // 예: itemContent.setTextColor(Color.RED)
         } else {
             // 클릭되지 않은 아이템 디자인 변경 로직
             // 예: itemContent.setTextColor(Color.BLACK)
-        }
+        }*/
 
         // 아이템 클릭 리스너 설정
         binding.root.setOnClickListener {

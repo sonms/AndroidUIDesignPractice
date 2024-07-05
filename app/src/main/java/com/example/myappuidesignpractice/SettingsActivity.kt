@@ -7,6 +7,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.example.myappuidesignpractice.fragment.FirstFragment
 
+//원래 쓰던 setting방식과는 다른 replace방식
 class SettingsActivity : AppCompatActivity() {
 
 
