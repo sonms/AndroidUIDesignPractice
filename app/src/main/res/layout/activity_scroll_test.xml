@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScrollTestActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -124,42 +125,6 @@
                     android:gravity="center"
                     android:text="3" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="24dp"
-                    android:background="#A474FD"
-                    android:gravity="center"
-                    android:text="4" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="24dp"
-                    android:background="#A474FD"
-                    android:gravity="center"
-                    android:text="5" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="24dp"
-                    android:background="#A474FD"
-                    android:gravity="center"
-                    android:text="6" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="24dp"
-                    android:background="#A474FD"
-                    android:gravity="center"
-                    android:text="7" />
-
             </LinearLayout>
 
 
@@ -176,8 +141,85 @@
                     android:background="@color/colorAccent" />
             </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/read_comment_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                android:baselineAligned="false"
+                android:fitsSystemWindows="true"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:visibility="visible"
+                android:windowIsFloating="false"
+                android:windowSoftInputMode="adjustResize"
+                app:layout_constraintBottom_toTopOf="@+id/fix_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <EditText
+                    android:id="@+id/read_comment_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="10"
+                    android:autofillHints=""
+                    android:background="@drawable/read_round_edittext"
+                    android:backgroundTint="@color/white"
+                    android:baselineAligned="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:hint="댓글을 작성해보세요."
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:scrollHorizontally="false"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/read_send_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        android:src="@drawable/baseline_send_24"
+                        android:visibility="gone" />
+
+                    <ImageButton
+                        android:id="@+id/read_edit_send_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/white"
+                        android:src="@drawable/baseline_send_24"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/sctext"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="hhhhhhh"
+                android:layout_gravity="center"
+                />
         </LinearLayout>
     </com.amar.library.ui.StickyScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
