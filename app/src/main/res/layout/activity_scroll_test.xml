@@ -158,20 +158,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <EditText
+                <TextView
                     android:id="@+id/read_comment_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_weight="10"
                     android:autofillHints=""
                     android:background="@drawable/read_round_edittext"
                     android:backgroundTint="@color/white"
                     android:baselineAligned="true"
                     android:clickable="true"
                     android:focusable="true"
-                    android:hint="댓글을 작성해보세요."
+                    android:text="댓글을 작성해보세요."
                     android:inputType="text"
                     android:padding="8dp"
                     android:scrollHorizontally="false"

@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myappuidesignpractice.BottomSheetFragment.BottomSheetFragment
 import com.example.myappuidesignpractice.databinding.ActivityScrollTestBinding
 
 
@@ -65,25 +66,16 @@ class ScrollTestActivity : AppCompatActivity() {
 
         mBinding!!.readCommentEt.setOnClickListener {
             mBinding!!.readCommentLl.visibility = View.VISIBLE
-            // 자동으로 포커스 줘서 댓글 달게 하기
-            mBinding!!.readCommentEt.text = null
-            mBinding!!.readCommentLl.requestFocus()
-            commentEditText = ""
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(mBinding!!.readCommentLl.findFocus(), InputMethodManager.SHOW_IMPLICIT)
-            this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-
-            /*setKeyboardVisibilityListener(object : OnKeyboardVisibilityListener {
-                override fun onVisibilityChanged(visible: Boolean) {
-                    // 키보드가 보이면 view를 보이게 하고, 아니면 숨기기
-                    if (visible) {
-                        Log.d("tet", "올")
-                    } else {
-                        Log.d("tet", "내")
+            val bottomSheet = BottomSheetFragment()
+            //bottomSheet.setStyle(DialogFragment.STYLE_NORMAL, R.style.RoundCornerBottomSheetDialogTheme)
+            bottomSheet.show(this.supportFragmentManager, bottomSheet.tag)
+            bottomSheet.apply {
+                setCallback(object : BottomSheetFragment.OnSendFromBottomSheetDialog{
+                    override fun sendValue(value: String) {
+                        Log.d("test", "BottomSheetDialog -> 액티비티로 전달된 값 : $value")
                     }
-                }
-            })*/
-            handleShiftUp(mBinding!!.readCommentLl)
+                })
+            }
         }
 
         mBinding!!.readCommentEt.addTextChangedListener(object : TextWatcher {
